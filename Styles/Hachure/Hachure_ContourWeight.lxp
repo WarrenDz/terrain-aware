@@ -1,0 +1,21 @@
+// Title: TAC_expr_HachureContourWeight
+//
+// Location: Copy/Paste this arcade expression in the X of the symbology panel.
+//
+// Overview: This Arcade expression modulates the stroke weight of the underlying
+//           contour lines. Based on the elevation values of the contour line,
+//           the stroke weight will be increased, decreased, or nulled.
+//
+// Effect: Contours that satisfy the various conditions below will have their
+//         stroke weight increased or decreased. This expression is optional and
+//         is provided in the event you'd like to have an increased stroke weight
+//         for some increment of contour line. Of course, there's always other
+//         methods to achieve the same result.
+
+// ex. Increase width of contour line for 100ft increments
+// Define elevation variable
+var elev = $feature.ELEVATION
+// if ends in '00' we'll increase the width otherwise use default of 0.25. Everything else will be a hidden contour and will only have hachures.
+var width = When(Right(elev,2) == '00', 0.5, Right(elev,2) == '25', 0.25, Right(elev,2) == '50', 0.25, Right(elev,2) == '75', 0.25, 0)
+
+return width

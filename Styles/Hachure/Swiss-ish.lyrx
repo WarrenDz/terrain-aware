@@ -1,0 +1,566 @@
+{
+  "type" : "CIMLayerDocument",
+  "version" : "2.6.0",
+  "build" : 24783,
+  "layers" : [
+    "CIMPATH=map/hachures2.xml"
+  ],
+  "layerDefinitions" : [
+    {
+      "type" : "CIMFeatureLayer",
+      "name" : "Swiss-ish",
+      "uRI" : "CIMPATH=map/hachures2.xml",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant"
+      },
+      "metadataURI" : "CIMPATH=Metadata/8e31d05dc5981703cbdea8f2848aa46a.xml",
+      "useSourceMetadata" : true,
+      "description" : "DEM_Contours",
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "mapElevationID" : "{EC49C74D-32C4-4417-B441-DAA21C4A2AA5}"
+      },
+      "expanded" : true,
+      "layer3DProperties" : {
+        "type" : "CIM3DLayerProperties",
+        "castShadows" : true,
+        "isLayerLit" : true,
+        "layerFaceCulling" : "None",
+        "maxDistance" : -1,
+        "minDistance" : -1,
+        "preloadTextureCutoffHigh" : 0,
+        "preloadTextureCutoffLow" : 0.25,
+        "textureCutoffHigh" : 0.25,
+        "textureCutoffLow" : 1,
+        "useCompressedTextures" : true,
+        "verticalExaggeration" : 1,
+        "exaggerationMode" : "ScaleZ",
+        "verticalUnit" : {
+          "uwkid" : 9001
+        },
+        "lighting" : "OneSideDataNormal"
+      },
+      "layerType" : "Operational",
+      "showLegends" : true,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "autoGenerateFeatureTemplates" : true,
+      "featureElevationExpression" : "0",
+      "featureTable" : {
+        "type" : "CIMFeatureTable",
+        "displayField" : "Id",
+        "editable" : true,
+        "dataConnection" : {
+          "type" : "CIMStandardDataConnection",
+          "workspaceConnectionString" : "DATABASE=\\\\Mac\\Home\\Documents\\ArcGIS\\Projects\\HachureTool\\HachureTool.gdb",
+          "workspaceFactory" : "FileGDB",
+          "dataset" : "DEM_Contours",
+          "datasetType" : "esriDTFeatureClass"
+        },
+        "studyAreaSpatialRel" : "esriSpatialRelUndefined",
+        "searchOrder" : "esriSearchOrderSpatial"
+      },
+      "htmlPopupEnabled" : true,
+      "selectable" : true,
+      "featureCacheType" : "Session",
+      "displayFiltersType" : "ByScale",
+      "labelClasses" : [
+        {
+          "type" : "CIMLabelClass",
+          "expression" : "$feature.Id",
+          "expressionEngine" : "Arcade",
+          "featuresToLabel" : "AllVisibleFeatures",
+          "maplexLabelPlacementProperties" : {
+            "type" : "CIMMaplexLabelPlacementProperties",
+            "featureType" : "Line",
+            "avoidPolygonHoles" : true,
+            "canOverrunFeature" : true,
+            "canPlaceLabelOutsidePolygon" : true,
+            "canRemoveOverlappingLabel" : true,
+            "canStackLabel" : true,
+            "connectionType" : "MinimizeLabels",
+            "constrainOffset" : "AboveLine",
+            "contourAlignmentType" : "Page",
+            "contourLadderType" : "Straight",
+            "contourMaximumAngle" : 90,
+            "enableConnection" : true,
+            "featureWeight" : 0,
+            "fontHeightReductionLimit" : 4,
+            "fontHeightReductionStep" : 0.5,
+            "fontWidthReductionLimit" : 90,
+            "fontWidthReductionStep" : 5,
+            "graticuleAlignmentType" : "Straight",
+            "keyNumberGroupName" : "Default",
+            "labelBuffer" : 15,
+            "labelLargestPolygon" : true,
+            "labelPriority" : -1,
+            "labelStackingProperties" : {
+              "type" : "CIMMaplexLabelStackingProperties",
+              "stackAlignment" : "ChooseBest",
+              "maximumNumberOfLines" : 3,
+              "minimumNumberOfCharsPerLine" : 3,
+              "maximumNumberOfCharsPerLine" : 24,
+              "separators" : [
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : " ",
+                  "splitAfter" : true
+                },
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : ",",
+                  "visible" : true,
+                  "splitAfter" : true
+                }
+              ]
+            },
+            "lineFeatureType" : "General",
+            "linePlacementMethod" : "OffsetStraightFromLine",
+            "maximumLabelOverrun" : 16,
+            "maximumLabelOverrunUnit" : "Point",
+            "minimumFeatureSizeUnit" : "Map",
+            "multiPartOption" : "OneLabelPerFeature",
+            "offsetAlongLineProperties" : {
+              "type" : "CIMMaplexOffsetAlongLineProperties",
+              "placementMethod" : "BestPositionAlongLine",
+              "labelAnchorPoint" : "CenterOfLabel",
+              "distanceUnit" : "Map",
+              "useLineDirection" : true
+            },
+            "pointExternalZonePriorities" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "polygonAnchorPointType" : "GeometricCenter",
+            "polygonBoundaryWeight" : 0,
+            "polygonExternalZones" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "polygonFeatureType" : "General",
+            "polygonInternalZones" : {
+              "type" : "CIMMaplexInternalZonePriorities",
+              "center" : 1
+            },
+            "polygonPlacementMethod" : "CurvedInPolygon",
+            "primaryOffset" : 1,
+            "primaryOffsetUnit" : "Point",
+            "removeExtraWhiteSpace" : true,
+            "repetitionIntervalUnit" : "Point",
+            "rotationProperties" : {
+              "type" : "CIMMaplexRotationProperties",
+              "rotationType" : "Arithmetic",
+              "alignmentType" : "Straight"
+            },
+            "secondaryOffset" : 100,
+            "strategyPriorities" : {
+              "type" : "CIMMaplexStrategyPriorities",
+              "stacking" : 1,
+              "overrun" : 2,
+              "fontCompression" : 3,
+              "fontReduction" : 4,
+              "abbreviation" : 5
+            },
+            "thinningDistanceUnit" : "Point",
+            "truncationMarkerCharacter" : ".",
+            "truncationMinimumLength" : 1,
+            "truncationPreferredCharacters" : "aeiou",
+            "truncationExcludedCharacters" : "0123456789"
+          },
+          "name" : "Class 1",
+          "priority" : -1,
+          "standardLabelPlacementProperties" : {
+            "type" : "CIMStandardLabelPlacementProperties",
+            "featureType" : "Line",
+            "featureWeight" : "Low",
+            "labelWeight" : "High",
+            "numLabelsOption" : "OneLabelPerName",
+            "lineLabelPosition" : {
+              "type" : "CIMStandardLineLabelPosition",
+              "above" : true,
+              "inLine" : true,
+              "parallel" : true
+            },
+            "lineLabelPriorities" : {
+              "type" : "CIMStandardLineLabelPriorities",
+              "aboveStart" : 3,
+              "aboveAlong" : 3,
+              "aboveEnd" : 3,
+              "centerStart" : 3,
+              "centerAlong" : 3,
+              "centerEnd" : 3,
+              "belowStart" : 3,
+              "belowAlong" : 3,
+              "belowEnd" : 3
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "pointPlacementPriorities" : {
+              "type" : "CIMStandardPointPlacementPriorities",
+              "aboveLeft" : 2,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerLeft" : 3,
+              "centerRight" : 2,
+              "belowLeft" : 3,
+              "belowCenter" : 3,
+              "belowRight" : 2
+            },
+            "rotationType" : "Arithmetic",
+            "polygonPlacementMethod" : "AlwaysHorizontal"
+          },
+          "textSymbol" : {
+            "type" : "CIMSymbolReference",
+            "symbol" : {
+              "type" : "CIMTextSymbol",
+              "blockProgression" : "TTB",
+              "depth3D" : 1,
+              "extrapolateBaselines" : true,
+              "fontEffects" : "Normal",
+              "fontEncoding" : "Unicode",
+              "fontFamilyName" : "Tahoma",
+              "fontStyleName" : "Regular",
+              "fontType" : "Unspecified",
+              "haloSize" : 1,
+              "height" : 10,
+              "hinting" : "Default",
+              "horizontalAlignment" : "Left",
+              "kerning" : true,
+              "letterWidth" : 100,
+              "ligatures" : true,
+              "lineGapType" : "ExtraLeading",
+              "symbol" : {
+                "type" : "CIMPolygonSymbol",
+                "symbolLayers" : [
+                  {
+                    "type" : "CIMSolidFill",
+                    "enable" : true,
+                    "color" : {
+                      "type" : "CIMRGBColor",
+                      "values" : [
+                        0,
+                        0,
+                        0,
+                        100
+                      ]
+                    }
+                  }
+                ]
+              },
+              "textCase" : "Normal",
+              "textDirection" : "LTR",
+              "verticalAlignment" : "Bottom",
+              "verticalGlyphOrientation" : "Right",
+              "wordSpacing" : 100,
+              "billboardMode3D" : "FaceNearPlane"
+            }
+          },
+          "useCodedValue" : true,
+          "visibility" : true,
+          "iD" : -1
+        }
+      ],
+      "renderer" : {
+        "type" : "CIMSimpleRenderer",
+        "visualVariables" : [
+          {
+            "type" : "CIMColorVisualVariable",
+            "authoringInfo" : {
+              "type" : "CIMVisualVariableAuthoringInfo",
+              "maxSliderValue" : 7,
+              "heading" : "ASPECT"
+            },
+            "maxValue" : 7,
+            "colorRamp" : {
+              "type" : "CIMMultipartColorRamp",
+              "colorRamps" : [
+                {
+                  "type" : "CIMPolarContinuousColorRamp",
+                  "colorSpace" : {
+                    "type" : "CIMICCColorSpace",
+                    "url" : "Default RGB"
+                  },
+                  "fromColor" : {
+                    "type" : "CIMRGBColor",
+                    "values" : [
+                      225,
+                      225,
+                      225,
+                      100
+                    ]
+                  },
+                  "toColor" : {
+                    "type" : "CIMHSVColor",
+                    "values" : [
+                      -1,
+                      0,
+                      0,
+                      100
+                    ]
+                  },
+                  "interpolationSpace" : "HSV",
+                  "polarDirection" : "Counterclockwise"
+                }
+              ],
+              "weights" : [
+                1
+              ]
+            },
+            "normalizationType" : "Nothing",
+            "valueExpressionInfo" : {
+              "type" : "CIMExpressionInfo",
+              "title" : "Custom",
+              "expression" : "$feature.ASPECT",
+              "returnType" : "Default"
+            },
+            "polygonSymbolColorTarget" : "Fill"
+          }
+        ],
+        "patch" : "Default",
+        "symbol" : {
+          "type" : "CIMSymbolReference",
+          "primitiveOverrides" : [
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "85364fc4-2f56-4439-8e97-2614f03a20de",
+              "propertyName" : "Size",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Custom",
+                "expression" : "// Title: Swissish_Bandwidth.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\n\n// Terrain constraints\nvar slope_min = 6\n\n// Render settings\nvar stroke_weight = 2\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf($feature.SLOPE > slope_min, Text(stroke_weight), Text(0))",
+                "returnType" : "Default"
+              }
+            },
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "7ec43a84-0c98-4191-ac6b-549177ee14f8",
+              "propertyName" : "Width",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Custom",
+                "expression" : "// Title: Swissish_ContourWeight.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\n\nvar slope_limit = 7\nvar aspect_min = 1\nvar aspect_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = $feature.SLOPE\nvar aspect = (($feature.ASPECT - aspect_min) * 7) / (aspect_max - aspect_min)\n\n// Terrain Value\n// create an easy to use terrain variable by merging slope/aspect\nvar terrain = (slope * 2) * (aspect / aspect_max)\nvar terrain_min = 0\nvar terrain_max = (slope * 2) * (aspect_max / aspect_max)\nvar terrain_range = terrain_max - terrain_min\n\nvar stroke_min = 0.1\nvar stroke_max = 0.75\nvar stroke_range = stroke_max - stroke_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure stroke weight\nvar stroke_weight = (((terrain - terrain_min) * stroke_range) / terrain_max) + stroke_min\n\n// If the elevation value ends in '0' we'll set the width. Otherwise, it will be a hidden contour and will only have hachures.\nvar elev = Text($feature.Contour)\nvar width = When(Right(elev,1) == '0', Text(stroke_weight), Text(0))\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf($feature.SLOPE < slope_limit && $feature.SLOPE > 1, Text(width), Text(0))",
+                "returnType" : "Default"
+              }
+            },
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "8754f342-761a-459d-bfff-73a849551c93",
+              "propertyName" : "StrokeWidth",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Custom",
+                "expression" : "// Title: Swissish_StrokeWeight.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\n\n// Terrain constraints\nvar slope_min = 6\nvar aspect_min = 1\nvar aspect_max = 7\nvar aspect = $feature.ASPECT\n\n// Rendering constraints\nvar stroke_min = 0.35\nvar stroke_max = 1\nvar stroke_range = stroke_max - stroke_min\n\n// Terrain Encoding\n// Map the terrain values to an aspect stroke weight\nvar hachure_weight = (((aspect - aspect_min) * stroke_range) / aspect_max) + stroke_min\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf($feature.SLOPE > slope_min, Text(hachure_weight), Text(0))",
+                "returnType" : "Default"
+              }
+            },
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "2a7d9ff1-7d63-4409-a095-fc89feba5a5a",
+              "propertyName" : "PlacementTemplate",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Custom",
+                "expression" : "// Title: Swissish_PlacementDensity.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 6\nvar aspect_min = 1\nvar aspect_max = 7\nvar aspect = $feature.ASPECT\n\n// Hachure Rendering Parameters\n// Dictate the min and max width of the hachure banding (pts)\nvar dense_min = 3\nvar dense_max = 5\nvar dense_range = dense_max - dense_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure rendering density\nvar hachure_density = (((aspect - aspect_min) * dense_range) / aspect_max) + dense_min\n\n// Invert Terrain Aware Value and Return\n// Invert the density value obtained so it logically scales with the shading behaviour we'd expect\nreturn IIf($feature.SLOPE > slope_min, Text((Round(Abs(hachure_density - dense_max) + dense_min, 2))), Text(0))",
+                "returnType" : "Default"
+              }
+            }
+          ],
+          "symbol" : {
+            "type" : "CIMLineSymbol",
+            "symbolLayers" : [
+              {
+                "type" : "CIMVectorMarker",
+                "effects" : [
+                  {
+                    "type" : "CIMGeometricEffectWave",
+                    "amplitude" : 0.20000000000000001,
+                    "period" : 10,
+                    "seed" : 1,
+                    "waveform" : "Random"
+                  }
+                ],
+                "enable" : true,
+                "primitiveName" : "85364fc4-2f56-4439-8e97-2614f03a20de",
+                "anchorPoint" : {
+                  "x" : 0,
+                  "y" : 0
+                },
+                "anchorPointUnits" : "Absolute",
+                "dominantSizeAxis3D" : "Z",
+                "rotation" : 90,
+                "size" : 1.5,
+                "billboardMode3D" : "FaceNearPlane",
+                "markerPlacement" : {
+                  "type" : "CIMMarkerPlacementAlongLineVariableSize",
+                  "primitiveName" : "2a7d9ff1-7d63-4409-a095-fc89feba5a5a",
+                  "angleToLine" : true,
+                  "controlPointPlacement" : "NoConstraint",
+                  "endings" : "NoConstraint",
+                  "placementTemplate" : [
+                    3
+                  ],
+                  "maxRandomOffset" : 2,
+                  "maxZoom" : 1,
+                  "minZoom" : 0.5,
+                  "numberOfSizes" : 5,
+                  "seed" : 13,
+                  "variationMethod" : "Random"
+                },
+                "frame" : {
+                  "xmin" : -2,
+                  "ymin" : -2,
+                  "xmax" : 2,
+                  "ymax" : 2
+                },
+                "markerGraphics" : [
+                  {
+                    "type" : "CIMMarkerGraphic",
+                    "geometry" : {
+                      "paths" : [
+                        [
+                          [
+                            2,
+                            0
+                          ],
+                          [
+                            -2,
+                            0
+                          ]
+                        ]
+                      ]
+                    },
+                    "symbol" : {
+                      "type" : "CIMLineSymbol",
+                      "symbolLayers" : [
+                        {
+                          "type" : "CIMSolidStroke",
+                          "effects" : [
+                            {
+                              "type" : "CIMGeometricEffectWave",
+                              "amplitude" : 0.25,
+                              "period" : 1,
+                              "seed" : 1,
+                              "waveform" : "Random"
+                            }
+                          ],
+                          "enable" : true,
+                          "capStyle" : "Round",
+                          "joinStyle" : "Round",
+                          "lineStyle3D" : "Strip",
+                          "miterLimit" : 10,
+                          "width" : 0.5,
+                          "color" : {
+                            "type" : "CIMRGBColor",
+                            "values" : [
+                              104,
+                              104,
+                              104,
+                              100
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "primitiveName" : "8754f342-761a-459d-bfff-73a849551c93"
+                  }
+                ],
+                "respectFrame" : true
+              },
+              {
+                "type" : "CIMSolidStroke",
+                "effects" : [
+                  {
+                    "type" : "CIMGeometricEffectDashes",
+                    "dashTemplate" : [
+                      5,
+                      3
+                    ],
+                    "lineDashEnding" : "NoConstraint",
+                    "controlPointEnding" : "NoConstraint"
+                  },
+                  {
+                    "type" : "CIMGeometricEffectWave",
+                    "amplitude" : 1,
+                    "period" : 12,
+                    "seed" : 1,
+                    "waveform" : "Random"
+                  }
+                ],
+                "enable" : true,
+                "primitiveName" : "7ec43a84-0c98-4191-ac6b-549177ee14f8",
+                "capStyle" : "Round",
+                "joinStyle" : "Round",
+                "lineStyle3D" : "Strip",
+                "miterLimit" : 10,
+                "width" : 0.25,
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    104,
+                    104,
+                    104,
+                    100
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "scaleSymbols" : true,
+      "snappable" : true,
+      "symbolLayerDrawing" : {
+        "type" : "CIMSymbolLayerDrawing"
+      }
+    }
+  ],
+  "binaryReferences" : [
+    {
+      "type" : "CIMBinaryReference",
+      "uRI" : "CIMPATH=Metadata/8e31d05dc5981703cbdea8f2848aa46a.xml",
+      "data" : "<?xml version=\"1.0\"?>\r\n<metadata xml:lang=\"en\"><Esri><CreaDate>20201207</CreaDate><CreaTime>10502800</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce></Esri><dataIdInfo><idCitation><resTitle>Hachures</resTitle></idCitation><idAbs>DEM_Contours</idAbs><idCredit></idCredit><idPurp></idPurp><resConst><Consts><useLimit></useLimit></Consts></resConst></dataIdInfo></metadata>\r\n"
+    }
+  ],
+  "elevationSurfaces" : [
+    {
+      "type" : "CIMMapElevationSurface",
+      "elevationMode" : "BaseGlobeSurface",
+      "name" : "Ground",
+      "verticalExaggeration" : 1,
+      "mapElevationID" : "{EC49C74D-32C4-4417-B441-DAA21C4A2AA5}",
+      "color" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          255,
+          255,
+          255,
+          100
+        ]
+      },
+      "surfaceTINShadingMode" : "Smooth",
+      "visibility" : true,
+      "expanded" : true
+    }
+  ],
+  "rGBColorProfile" : "sRGB IEC61966-2-1 noBPC",
+  "cMYKColorProfile" : "U.S. Web Coated (SWOP) v2"
+}

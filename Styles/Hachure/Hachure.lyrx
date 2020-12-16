@@ -1,0 +1,838 @@
+{
+  "type" : "CIMLayerDocument",
+  "version" : "2.6.0",
+  "build" : 24783,
+  "layers" : [
+    "CIMPATH=map/sd_dem_ta_contours3.xml"
+  ],
+  "layerDefinitions" : [
+    {
+      "type" : "CIMFeatureLayer",
+      "name" : "sd_dem_TA_Contours",
+      "uRI" : "CIMPATH=map/sd_dem_ta_contours3.xml",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant"
+      },
+      "metadataURI" : "CIMPATH=Metadata/43a00bb2c1fd58a1fc86c86da2827cfb.xml",
+      "useSourceMetadata" : true,
+      "description" : "sd_dem_TA_Contours",
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "mapElevationID" : "{EC49C74D-32C4-4417-B441-DAA21C4A2AA5}"
+      },
+      "expanded" : true,
+      "layer3DProperties" : {
+        "type" : "CIM3DLayerProperties",
+        "castShadows" : true,
+        "isLayerLit" : true,
+        "layerFaceCulling" : "None",
+        "maxDistance" : -1,
+        "minDistance" : -1,
+        "preloadTextureCutoffHigh" : 0,
+        "preloadTextureCutoffLow" : 0.25,
+        "textureCutoffHigh" : 0.25,
+        "textureCutoffLow" : 1,
+        "useCompressedTextures" : true,
+        "verticalExaggeration" : 1,
+        "exaggerationMode" : "ScaleZ",
+        "verticalUnit" : {
+          "uwkid" : 9001
+        },
+        "lighting" : "OneSideDataNormal"
+      },
+      "layerType" : "Operational",
+      "showLegends" : true,
+      "visibility" : false,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "charts" : [
+        {
+          "type" : "CIMChart",
+          "name" : "Histogram 2",
+          "series" : [
+            {
+              "type" : "CIMChartHistogramSeries",
+              "name" : "Slope",
+              "uniqueName" : "Series0",
+              "fields" : [
+                "SLOPE"
+              ],
+              "verticalAxis" : 1,
+              "colorType" : "SingleColor",
+              "visible" : true,
+              "dataLabelText" : {
+                "type" : "CIMChartTextProperties",
+                "fontFillColor" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    68,
+                    68,
+                    68,
+                    100
+                  ]
+                },
+                "fontFamilyName" : "Calibri",
+                "fontSize" : 9,
+                "fontWeight" : "Normal",
+                "textCase" : "Normal"
+              },
+              "binCount" : 32,
+              "showMean" : true,
+              "fillSymbolProperties" : {
+                "type" : "CIMChartFillSymbolProperties",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    166,
+                    206,
+                    227,
+                    70
+                  ]
+                }
+              },
+              "meanLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 2,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    227,
+                    36,
+                    0,
+                    100
+                  ]
+                }
+              },
+              "medianLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 2,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    144,
+                    66,
+                    159,
+                    100
+                  ]
+                }
+              },
+              "standardDeviationLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 2,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    192,
+                    154,
+                    98,
+                    100
+                  ]
+                }
+              },
+              "dataTransformationType" : "None",
+              "distributionLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 2,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    101,
+                    158,
+                    199,
+                    100
+                  ]
+                }
+              }
+            }
+          ],
+          "generalProperties" : {
+            "type" : "CIMChartGeneralProperties",
+            "title" : "Distribution of Slope",
+            "showTitle" : true,
+            "useAutomaticTitle" : true,
+            "showSubTitle" : true,
+            "showFooter" : true,
+            "titleText" : {
+              "type" : "CIMChartTextProperties",
+              "fontFillColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  68,
+                  68,
+                  68,
+                  100
+                ]
+              },
+              "fontFamilyName" : "Calibri",
+              "fontSize" : 16,
+              "fontWeight" : "Normal",
+              "textCase" : "Normal"
+            },
+            "subTitleText" : {
+              "type" : "CIMChartTextProperties",
+              "fontFillColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  68,
+                  68,
+                  68,
+                  100
+                ]
+              },
+              "fontFamilyName" : "Calibri",
+              "fontSize" : 12,
+              "fontWeight" : "Normal",
+              "textCase" : "Normal"
+            },
+            "footerText" : {
+              "type" : "CIMChartTextProperties",
+              "fontFillColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  68,
+                  68,
+                  68,
+                  100
+                ]
+              },
+              "fontFamilyName" : "Calibri",
+              "fontSize" : 12,
+              "fontWeight" : "Normal",
+              "textCase" : "Normal"
+            },
+            "backgroundSymbolProperties" : {
+              "type" : "CIMChartFillSymbolProperties",
+              "color" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  255,
+                  255,
+                  255,
+                  100
+                ]
+              }
+            },
+            "gridLineSymbolProperties" : {
+              "type" : "CIMChartLineSymbolProperties",
+              "visible" : true,
+              "width" : 1,
+              "style" : "Solid",
+              "color" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  119,
+                  119,
+                  119,
+                  100
+                ]
+              }
+            }
+          },
+          "legend" : {
+            "type" : "CIMChartLegend",
+            "visible" : true,
+            "showTitle" : true,
+            "alignment" : "Right",
+            "legendText" : {
+              "type" : "CIMChartTextProperties",
+              "fontFillColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  68,
+                  68,
+                  68,
+                  100
+                ]
+              },
+              "fontFamilyName" : "Calibri",
+              "fontSize" : 10.800000000000001,
+              "fontWeight" : "Normal",
+              "textCase" : "Normal"
+            },
+            "legendTitle" : {
+              "type" : "CIMChartTextProperties",
+              "fontFillColor" : {
+                "type" : "CIMRGBColor",
+                "values" : [
+                  68,
+                  68,
+                  68,
+                  100
+                ]
+              },
+              "fontFamilyName" : "Calibri",
+              "fontSize" : 10.800000000000001,
+              "fontWeight" : "Normal",
+              "textCase" : "Normal"
+            }
+          },
+          "axes" : [
+            {
+              "type" : "CIMChartAxis",
+              "visible" : true,
+              "title" : "Slope",
+              "showTitle" : true,
+              "useAutomaticTitle" : true,
+              "valueFormat" : "N2",
+              "valueNumberFormat" : {
+                "type" : "CIMNumericFormat",
+                "alignmentOption" : "esriAlignRight",
+                "alignmentWidth" : 0,
+                "roundingOption" : "esriRoundNumberOfDecimals",
+                "roundingValue" : 0
+              },
+              "calculateAutomaticMinimum" : true,
+              "calculateAutomaticMaximum" : true,
+              "minimum" : null,
+              "maximum" : null,
+              "titleText" : {
+                "type" : "CIMChartTextProperties",
+                "fontFillColor" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    68,
+                    68,
+                    68,
+                    100
+                  ]
+                },
+                "fontFamilyName" : "Calibri",
+                "fontItalic" : true,
+                "fontSize" : 12,
+                "fontWeight" : "Normal",
+                "textCase" : "Normal"
+              },
+              "labelText" : {
+                "type" : "CIMChartTextProperties",
+                "fontFillColor" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    68,
+                    68,
+                    68,
+                    100
+                  ]
+                },
+                "fontFamilyName" : "Calibri",
+                "fontSize" : 10.800000000000001,
+                "fontWeight" : "Normal",
+                "textCase" : "Normal"
+              },
+              "axisLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 1,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    170,
+                    170,
+                    170,
+                    100
+                  ]
+                }
+              },
+              "labelCharacterLimit" : 11,
+              "navigationScaleFactor" : 1
+            },
+            {
+              "type" : "CIMChartAxis",
+              "visible" : true,
+              "title" : "Count",
+              "showTitle" : true,
+              "useAutomaticTitle" : true,
+              "valueFormat" : "N2",
+              "dateTimeFormat" : "M/d/yyyy",
+              "calculateAutomaticMinimum" : true,
+              "calculateAutomaticMaximum" : true,
+              "minimum" : null,
+              "maximum" : null,
+              "titleText" : {
+                "type" : "CIMChartTextProperties",
+                "fontFillColor" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    68,
+                    68,
+                    68,
+                    100
+                  ]
+                },
+                "fontFamilyName" : "Calibri",
+                "fontItalic" : true,
+                "fontSize" : 12,
+                "fontWeight" : "Normal",
+                "textCase" : "Normal"
+              },
+              "labelText" : {
+                "type" : "CIMChartTextProperties",
+                "fontFillColor" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    68,
+                    68,
+                    68,
+                    100
+                  ]
+                },
+                "fontFamilyName" : "Calibri",
+                "fontSize" : 10.800000000000001,
+                "fontWeight" : "Normal",
+                "textCase" : "Normal"
+              },
+              "axisLineSymbolProperties" : {
+                "type" : "CIMChartLineSymbolProperties",
+                "visible" : true,
+                "width" : 1,
+                "style" : "Solid",
+                "color" : {
+                  "type" : "CIMRGBColor",
+                  "values" : [
+                    170,
+                    170,
+                    170,
+                    0
+                  ]
+                }
+              },
+              "labelCharacterLimit" : 11,
+              "navigationScaleFactor" : 1
+            }
+          ],
+          "mapSelectionHandling" : "Highlight"
+        }
+      ],
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "autoGenerateFeatureTemplates" : true,
+      "featureElevationExpression" : "0",
+      "featureTable" : {
+        "type" : "CIMFeatureTable",
+        "displayField" : "Id",
+        "editable" : true,
+        "dataConnection" : {
+          "type" : "CIMStandardDataConnection",
+          "workspaceConnectionString" : "DATABASE=\\\\Mac\\Home\\Documents\\ArcGIS\\Projects\\HachureTool\\HachureTool.gdb",
+          "workspaceFactory" : "FileGDB",
+          "dataset" : "sd_dem_TA_Contours",
+          "datasetType" : "esriDTFeatureClass"
+        },
+        "studyAreaSpatialRel" : "esriSpatialRelUndefined",
+        "searchOrder" : "esriSearchOrderSpatial"
+      },
+      "featureTemplates" : [
+        {
+          "type" : "CIMFeatureTemplate",
+          "name" : "sd_dem_TA_Contours",
+          "tags" : "Line",
+          "toolProgID" : "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "htmlPopupEnabled" : true,
+      "selectable" : true,
+      "featureCacheType" : "Session",
+      "displayFiltersType" : "ByScale",
+      "labelClasses" : [
+        {
+          "type" : "CIMLabelClass",
+          "expression" : "$feature.Id",
+          "expressionEngine" : "Arcade",
+          "featuresToLabel" : "AllVisibleFeatures",
+          "maplexLabelPlacementProperties" : {
+            "type" : "CIMMaplexLabelPlacementProperties",
+            "featureType" : "Line",
+            "avoidPolygonHoles" : true,
+            "canOverrunFeature" : true,
+            "canPlaceLabelOutsidePolygon" : true,
+            "canRemoveOverlappingLabel" : true,
+            "canStackLabel" : true,
+            "connectionType" : "MinimizeLabels",
+            "constrainOffset" : "AboveLine",
+            "contourAlignmentType" : "Page",
+            "contourLadderType" : "Straight",
+            "contourMaximumAngle" : 90,
+            "enableConnection" : true,
+            "featureWeight" : 0,
+            "fontHeightReductionLimit" : 4,
+            "fontHeightReductionStep" : 0.5,
+            "fontWidthReductionLimit" : 90,
+            "fontWidthReductionStep" : 5,
+            "graticuleAlignmentType" : "Straight",
+            "keyNumberGroupName" : "Default",
+            "labelBuffer" : 15,
+            "labelLargestPolygon" : true,
+            "labelPriority" : -1,
+            "labelStackingProperties" : {
+              "type" : "CIMMaplexLabelStackingProperties",
+              "stackAlignment" : "ChooseBest",
+              "maximumNumberOfLines" : 3,
+              "minimumNumberOfCharsPerLine" : 3,
+              "maximumNumberOfCharsPerLine" : 24,
+              "separators" : [
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : " ",
+                  "splitAfter" : true
+                },
+                {
+                  "type" : "CIMMaplexStackingSeparator",
+                  "separator" : ",",
+                  "visible" : true,
+                  "splitAfter" : true
+                }
+              ]
+            },
+            "lineFeatureType" : "General",
+            "linePlacementMethod" : "OffsetStraightFromLine",
+            "maximumLabelOverrun" : 16,
+            "maximumLabelOverrunUnit" : "Point",
+            "minimumFeatureSizeUnit" : "Map",
+            "multiPartOption" : "OneLabelPerFeature",
+            "offsetAlongLineProperties" : {
+              "type" : "CIMMaplexOffsetAlongLineProperties",
+              "placementMethod" : "BestPositionAlongLine",
+              "labelAnchorPoint" : "CenterOfLabel",
+              "distanceUnit" : "Map",
+              "useLineDirection" : true
+            },
+            "pointExternalZonePriorities" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "polygonAnchorPointType" : "GeometricCenter",
+            "polygonBoundaryWeight" : 0,
+            "polygonExternalZones" : {
+              "type" : "CIMMaplexExternalZonePriorities",
+              "aboveLeft" : 4,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerRight" : 3,
+              "belowRight" : 5,
+              "belowCenter" : 7,
+              "belowLeft" : 8,
+              "centerLeft" : 6
+            },
+            "polygonFeatureType" : "General",
+            "polygonInternalZones" : {
+              "type" : "CIMMaplexInternalZonePriorities",
+              "center" : 1
+            },
+            "polygonPlacementMethod" : "CurvedInPolygon",
+            "primaryOffset" : 1,
+            "primaryOffsetUnit" : "Point",
+            "removeExtraWhiteSpace" : true,
+            "repetitionIntervalUnit" : "Point",
+            "rotationProperties" : {
+              "type" : "CIMMaplexRotationProperties",
+              "rotationType" : "Arithmetic",
+              "alignmentType" : "Straight"
+            },
+            "secondaryOffset" : 100,
+            "strategyPriorities" : {
+              "type" : "CIMMaplexStrategyPriorities",
+              "stacking" : 1,
+              "overrun" : 2,
+              "fontCompression" : 3,
+              "fontReduction" : 4,
+              "abbreviation" : 5
+            },
+            "thinningDistanceUnit" : "Point",
+            "truncationMarkerCharacter" : ".",
+            "truncationMinimumLength" : 1,
+            "truncationPreferredCharacters" : "aeiou",
+            "truncationExcludedCharacters" : "0123456789"
+          },
+          "name" : "Class 1",
+          "priority" : -1,
+          "standardLabelPlacementProperties" : {
+            "type" : "CIMStandardLabelPlacementProperties",
+            "featureType" : "Line",
+            "featureWeight" : "Low",
+            "labelWeight" : "High",
+            "numLabelsOption" : "OneLabelPerName",
+            "lineLabelPosition" : {
+              "type" : "CIMStandardLineLabelPosition",
+              "above" : true,
+              "inLine" : true,
+              "parallel" : true
+            },
+            "lineLabelPriorities" : {
+              "type" : "CIMStandardLineLabelPriorities",
+              "aboveStart" : 3,
+              "aboveAlong" : 3,
+              "aboveEnd" : 3,
+              "centerStart" : 3,
+              "centerAlong" : 3,
+              "centerEnd" : 3,
+              "belowStart" : 3,
+              "belowAlong" : 3,
+              "belowEnd" : 3
+            },
+            "pointPlacementMethod" : "AroundPoint",
+            "pointPlacementPriorities" : {
+              "type" : "CIMStandardPointPlacementPriorities",
+              "aboveLeft" : 2,
+              "aboveCenter" : 2,
+              "aboveRight" : 1,
+              "centerLeft" : 3,
+              "centerRight" : 2,
+              "belowLeft" : 3,
+              "belowCenter" : 3,
+              "belowRight" : 2
+            },
+            "rotationType" : "Arithmetic",
+            "polygonPlacementMethod" : "AlwaysHorizontal"
+          },
+          "textSymbol" : {
+            "type" : "CIMSymbolReference",
+            "symbol" : {
+              "type" : "CIMTextSymbol",
+              "blockProgression" : "TTB",
+              "depth3D" : 1,
+              "extrapolateBaselines" : true,
+              "fontEffects" : "Normal",
+              "fontEncoding" : "Unicode",
+              "fontFamilyName" : "Tahoma",
+              "fontStyleName" : "Regular",
+              "fontType" : "Unspecified",
+              "haloSize" : 1,
+              "height" : 10,
+              "hinting" : "Default",
+              "horizontalAlignment" : "Left",
+              "kerning" : true,
+              "letterWidth" : 100,
+              "ligatures" : true,
+              "lineGapType" : "ExtraLeading",
+              "symbol" : {
+                "type" : "CIMPolygonSymbol",
+                "symbolLayers" : [
+                  {
+                    "type" : "CIMSolidFill",
+                    "enable" : true,
+                    "color" : {
+                      "type" : "CIMRGBColor",
+                      "values" : [
+                        0,
+                        0,
+                        0,
+                        100
+                      ]
+                    }
+                  }
+                ]
+              },
+              "textCase" : "Normal",
+              "textDirection" : "LTR",
+              "verticalAlignment" : "Bottom",
+              "verticalGlyphOrientation" : "Right",
+              "wordSpacing" : 100,
+              "billboardMode3D" : "FaceNearPlane"
+            }
+          },
+          "useCodedValue" : true,
+          "visibility" : true,
+          "iD" : -1
+        }
+      ],
+      "renderer" : {
+        "type" : "CIMSimpleRenderer",
+        "patch" : "Default",
+        "symbol" : {
+          "type" : "CIMSymbolReference",
+          "primitiveOverrides" : [
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "8754f342-761a-459d-bfff-73a849551c93",
+              "propertyName" : "StrokeWidth",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Hachure_StrokeWeight",
+                "expression" : "// Title: Hachure_StrokeWeight.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\n\nvar slope_min = 1\nvar slope_max = 7\nvar aspect_min = 1\nvar aspect_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = (($feature.SLOPE - slope_min) * slope_max) / (slope_max - slope_min)\nvar aspect = (($feature.ASPECT - aspect_min) * slope_max) / (aspect_max - aspect_min)\n\n// Terrain Value\n// create an easy to use terrain variable by merging slope/aspect\nvar terrain = (slope * 2) * (aspect / aspect_max)\nvar terrain_min = 0\nvar terrain_max = (slope_max * 2) * (aspect_max / aspect_max)\nvar terrain_range = terrain_max - terrain_min\n\n// Hachure Rendering Parameters\n// Dictate the min and max stroke weight of the hachure strokes (pts)\nvar width_min = 0.25\nvar width_max = 1.5\nvar width_range = width_max - width_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure stroke weight\nvar hachure_weight = (((terrain - terrain_min) * width_range) / terrain_max) + width_min\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf($feature.ASPECT >= aspect_min && $feature.SLOPE >= slope_min, Text(hachure_weight), 0)",
+                "returnType" : "Default"
+              }
+            },
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "85364fc4-2f56-4439-8e97-2614f03a20de",
+              "propertyName" : "Size",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Hachure_Bandwidth",
+                "expression" : "// Title: HachureBandwidth.lxp\n//\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n//\n// Overview: This Arcade expression modulates the width of the hachure band per\n//           contour line. Based on the SLOPE and ASPECT values of the contour\n//           line, the length of the hachure strokes will be lengthened or\n//           shortened appropriately to depict the characteristics of the terrain.\n//\n// Effect: Contours across flat slopes will be rendered with longer hachures to\n//         accommodate the greater spacing between adjacent contour lines in\n//         otherwise areas. Contours along steep slopes will have shorter strokes\n//         to adjust for the proximity of adjacent contours in these sloped areas.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 1\nvar slope_max = 7\nvar aspect_min = 1\nvar aspect_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = (($feature.SLOPE - slope_min) * slope_max) / (slope_max - slope_min)\nvar aspect = (($feature.ASPECT - aspect_min) * aspect_max) / (aspect_max - aspect_min)\n\n// Terrain Value\nvar terrain = (slope * 2)\nvar terrain_min = 0\nvar terrain_max = 14\nvar terrain_range = terrain_max - terrain_min\n\n// Hachure Rendering Parameters\n// Dictate the min and max width of the hachure banding (pts)\nvar size_min = 0.75\nvar size_max = 5\nvar size_range = size_max - size_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure rendering width\nvar hachure_size = (((terrain - terrain_min) * size_range) / terrain_range) + size_min\n\n// Return Terrain Aware Value\n// here we invert the size value (steep slope = narrow, shallow slope = wide)\nreturn IIf($feature.ASPECT >= aspect_min && $feature.SLOPE >= slope_min, Text((Abs(hachure_size - size_max) + size_min)), 0)",
+                "returnType" : "Default"
+              }
+            },
+            {
+              "type" : "CIMPrimitiveOverride",
+              "primitiveName" : "2a7d9ff1-7d63-4409-a095-fc89feba5a5a",
+              "propertyName" : "PlacementTemplate",
+              "valueExpressionInfo" : {
+                "type" : "CIMExpressionInfo",
+                "title" : "Hachure_PlacementDensity",
+                "expression" : "// Title: Hachure_PlacementDensity.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 1\nvar slope_max = 7\nvar aspect_min = 1\nvar aspect_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = (($feature.SLOPE - slope_min) * slope_max) / (slope_max - slope_min)\nvar aspect = (($feature.ASPECT - aspect_min) * aspect_max) / (aspect_max - aspect_min)\n\n// Terrain Value\n// create an easy to use terrain variable by merging slope/aspect\nvar terrain = (slope * 2) * (aspect / aspect_max)\nvar terrain_min = 0\nvar terrain_max = (slope_max * 2) * (aspect_max / aspect_max)\nvar terrain_range = terrain_max - terrain_min\n\n// Hachure Rendering Parameters\n// Dictate the min and max width of the hachure banding (pts)\nvar dense_min = 1.5\nvar dense_max = 6\nvar dense_range = dense_max - dense_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure rendering density\nvar hachure_density = (((terrain - terrain_min) * dense_range) / terrain_max) + dense_min\n\n// Invert Terrain Aware Value and Return\n// Invert the density value obtained so it logically scales with the shading behaviour we'd expect\nreturn IIf($feature.ASPECT >= aspect_min && $feature.SLOPE >= slope_min, Text((Round(Abs(hachure_density - dense_max) + dense_min, 2))), 0)",
+                "returnType" : "Default"
+              }
+            }
+          ],
+          "symbol" : {
+            "type" : "CIMLineSymbol",
+            "symbolLayers" : [
+              {
+                "type" : "CIMVectorMarker",
+                "effects" : [
+                  {
+                    "type" : "CIMGeometricEffectWave",
+                    "amplitude" : 0.20000000000000001,
+                    "period" : 10,
+                    "seed" : 1,
+                    "waveform" : "Random"
+                  }
+                ],
+                "enable" : true,
+                "primitiveName" : "85364fc4-2f56-4439-8e97-2614f03a20de",
+                "anchorPoint" : {
+                  "x" : 0,
+                  "y" : 0
+                },
+                "anchorPointUnits" : "Absolute",
+                "dominantSizeAxis3D" : "Z",
+                "rotation" : 90,
+                "size" : 1.5,
+                "billboardMode3D" : "FaceNearPlane",
+                "markerPlacement" : {
+                  "type" : "CIMMarkerPlacementAlongLineVariableSize",
+                  "primitiveName" : "2a7d9ff1-7d63-4409-a095-fc89feba5a5a",
+                  "angleToLine" : true,
+                  "controlPointPlacement" : "NoConstraint",
+                  "endings" : "NoConstraint",
+                  "placementTemplate" : [
+                    4
+                  ],
+                  "maxRandomOffset" : 2,
+                  "maxZoom" : 1,
+                  "minZoom" : 0.5,
+                  "numberOfSizes" : 5,
+                  "seed" : 13,
+                  "variationMethod" : "Random"
+                },
+                "frame" : {
+                  "xmin" : -2,
+                  "ymin" : -2,
+                  "xmax" : 2,
+                  "ymax" : 2
+                },
+                "markerGraphics" : [
+                  {
+                    "type" : "CIMMarkerGraphic",
+                    "geometry" : {
+                      "paths" : [
+                        [
+                          [
+                            2,
+                            0
+                          ],
+                          [
+                            -2,
+                            0
+                          ]
+                        ]
+                      ]
+                    },
+                    "symbol" : {
+                      "type" : "CIMLineSymbol",
+                      "symbolLayers" : [
+                        {
+                          "type" : "CIMSolidStroke",
+                          "effects" : [
+                            {
+                              "type" : "CIMGeometricEffectWave",
+                              "amplitude" : 0.5,
+                              "period" : 2,
+                              "seed" : 1,
+                              "waveform" : "Random"
+                            }
+                          ],
+                          "enable" : true,
+                          "capStyle" : "Round",
+                          "joinStyle" : "Round",
+                          "lineStyle3D" : "Strip",
+                          "miterLimit" : 10,
+                          "width" : 1,
+                          "color" : {
+                            "type" : "CIMRGBColor",
+                            "values" : [
+                              0,
+                              0,
+                              0,
+                              100
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "primitiveName" : "8754f342-761a-459d-bfff-73a849551c93"
+                  }
+                ],
+                "respectFrame" : true
+              }
+            ]
+          }
+        }
+      },
+      "scaleSymbols" : true,
+      "snappable" : true,
+      "symbolLayerDrawing" : {
+        "type" : "CIMSymbolLayerDrawing"
+      }
+    }
+  ],
+  "binaryReferences" : [
+    {
+      "type" : "CIMBinaryReference",
+      "uRI" : "CIMPATH=Metadata/43a00bb2c1fd58a1fc86c86da2827cfb.xml",
+      "data" : "<?xml version=\"1.0\"?>\r\n<metadata xml:lang=\"en\"><Esri><CreaDate>20201202</CreaDate><CreaTime>21030900</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce></Esri><dataIdInfo><idCitation><resTitle>sd_dem_TA_Contours</resTitle></idCitation><idAbs>sd_dem_TA_Contours</idAbs><idCredit></idCredit><idPurp></idPurp><resConst><Consts><useLimit></useLimit></Consts></resConst></dataIdInfo></metadata>\r\n"
+    }
+  ],
+  "elevationSurfaces" : [
+    {
+      "type" : "CIMMapElevationSurface",
+      "elevationMode" : "BaseGlobeSurface",
+      "name" : "Ground",
+      "verticalExaggeration" : 1,
+      "mapElevationID" : "{EC49C74D-32C4-4417-B441-DAA21C4A2AA5}",
+      "color" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          255,
+          255,
+          255,
+          100
+        ]
+      },
+      "surfaceTINShadingMode" : "Smooth",
+      "visibility" : true,
+      "expanded" : true
+    }
+  ],
+  "rGBColorProfile" : "sRGB IEC61966-2-1 noBPC",
+  "cMYKColorProfile" : "U.S. Web Coated (SWOP) v2"
+}
