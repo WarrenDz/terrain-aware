@@ -1,7 +1,7 @@
 # Terrain Aware Toolbox
 
 ## Create Terrain Aware Layers
-This tool is the core of the toolbox. It’s the heavy lifter and creates all of the terrain aware data framework that is needed to render the cartographic outputs. The steps involved largely follow those outlined in [this walkthrough](https://warrenrdavison.wixsite.com/maps/post/revisiting-hachure-lines-dynamic-hachure-contours-in-arcgis-pro) with the exception of a few enhancements that were implemented and the fact that it has been scripted as a python tool.
+This tool is the core of the toolbox. It’s the heavy lifter and creates all of the terrain aware data framework that is needed to render the cartographic outputs. The steps involved largely follow those outlined in [this walkthrough](https://warrenrdavison.wixsite.com/maps/post/revisiting-hachure-lines-dynamic-hachure-contours-in-arcgis-pro) with the exception of a few enhancements that were implemented in the process of scripting the python tool.
 
 ### Parameters
 ###### Notes
@@ -33,4 +33,4 @@ All of the styles included with this toolbox rely on [Attribute-driven Symbology
 ### Parameters
 ###### Notes
 
-# FAQ
+# Development Goals

@@ -24,7 +24,7 @@ You're all set, you should now see the toolbox in your project catalog. For a de
 ## Note
 The toolbox python script references the style samples using relative paths to the resources so it's best to keep the files in their current organization to ensure everything continues to function.
 
-# Contents
+# Repository Contents
 The contents of this repo are organized into a folder structure as follows.
 
 ## Toolbox
@@ -32,11 +32,12 @@ The toolbox is authored as a [Python Toolbox](https://pro.arcgis.com/en/pro-app/
 
 Further detail describing how these tools function is provided in the associated [readme](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#terrain-aware-toolbox).
 
-## Samples
-This `Samples` folder contains all the gratuitous screenshots of the tool outputs in all their rendered glory. Feast your eyes on these [symbology snacks](), get inspired, and go make your own!
-
-If you do make some maps and want to share, send your screenshots or maps my way @WarrenDz.
+_*The core geoprocessing tool is functional although some areas of improvement exist. For a breakdown of current issues, limitations, and next steps check out the Toolbox readme and the [development goals section](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#development-goals).
 
 ## Styles
-This folder sub-directories, organized by general technique, containing all of the layer files `.lyrx`, arcade expressions `.lxp`, and the style file `.stylx` required to start rendering your _'terrain aware'_ layers.
-link to [styles folder](https://github.com/WarrenDz/terrain-aware/tree/main/Styles#styles)
+This [folder and its sub-directories](https://github.com/WarrenDz/terrain-aware/tree/main/Styles#styles) are organized by general technique, containing all of the layer files `.lyrx`, arcade expressions `.lxp`, and the style file `.stylx` required to start rendering your _'terrain aware'_ layers. Each technique will have an additional readme detailing how to edit the arcade expressions.
+
+## Samples
+This `Samples` folder contains all the gratuitous screenshots of the tool outputs in all their rendered glory. Feast your eyes on these [symbology snacks](https://github.com/WarrenDz/terrain-aware/tree/main/Samples), get inspired, and go make your own!
+
+If you do make some maps and want to share, send your screenshots or maps my way @WarrenDz.
