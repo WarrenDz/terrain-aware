@@ -1,7 +1,7 @@
 {
   "type" : "CIMLayerDocument",
-  "version" : "2.6.0",
-  "build" : 24783,
+  "version" : "2.7.0",
+  "build" : 26828,
   "layers" : [
     "CIMPATH=map/hachures2.xml"
   ],
@@ -49,6 +49,7 @@
       "serviceLayerID" : -1,
       "refreshRate" : -1,
       "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
       "autoGenerateFeatureTemplates" : true,
       "featureElevationExpression" : "0",
       "featureTable" : {
@@ -69,6 +70,7 @@
       "selectable" : true,
       "featureCacheType" : "Session",
       "displayFiltersType" : "ByScale",
+      "featureBlendingMode" : "Alpha",
       "labelClasses" : [
         {
           "type" : "CIMLabelClass",
@@ -185,7 +187,8 @@
             "truncationMarkerCharacter" : ".",
             "truncationMinimumLength" : 1,
             "truncationPreferredCharacters" : "aeiou",
-            "truncationExcludedCharacters" : "0123456789"
+            "truncationExcludedCharacters" : "0123456789",
+            "polygonAnchorPointPerimeterInsetUnit" : "Point"
           },
           "name" : "Class 1",
           "priority" : -1,
@@ -357,7 +360,7 @@
               "valueExpressionInfo" : {
                 "type" : "CIMExpressionInfo",
                 "title" : "Custom",
-                "expression" : "// Title: Swissish_ContourWeight.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\n\nvar slope_limit = 7\nvar aspect_min = 1\nvar aspect_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = $feature.SLOPE\nvar aspect = (($feature.ASPECT - aspect_min) * 7) / (aspect_max - aspect_min)\n\n// Terrain Value\n// create an easy to use terrain variable by merging slope/aspect\nvar terrain = (slope * 2) * (aspect / aspect_max)\nvar terrain_min = 0\nvar terrain_max = (slope * 2) * (aspect_max / aspect_max)\nvar terrain_range = terrain_max - terrain_min\n\nvar stroke_min = 0.1\nvar stroke_max = 0.75\nvar stroke_range = stroke_max - stroke_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure stroke weight\nvar stroke_weight = (((terrain - terrain_min) * stroke_range) / terrain_max) + stroke_min\n\n// If the elevation value ends in '0' we'll set the width. Otherwise, it will be a hidden contour and will only have hachures.\nvar elev = Text($feature.Contour)\nvar width = When(Right(elev,1) == '0', Text(stroke_weight), Text(0))\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf($feature.SLOPE < slope_limit && $feature.SLOPE > 1, Text(width), Text(0))",
+                "expression" : "// Title: Swissish_ContourWeight.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 0\nvar slope_max = 7\n\n// Remap constrained terrain inputs to standard range (1 - 7)\nvar slope = $feature.SLOPE\n\n// Symbol Encoding\n// Map the slope values to a contour stroke weight\nvar stroke_weight = 0.5\n\n// Return Terrain Aware Value where criteria is met\nreturn IIf(slope < slope_max && slope >= slope_min, Text(stroke_weight), Text(0))",
                 "returnType" : "Default"
               }
             },
@@ -378,8 +381,8 @@
               "propertyName" : "PlacementTemplate",
               "valueExpressionInfo" : {
                 "type" : "CIMExpressionInfo",
-                "title" : "Custom",
-                "expression" : "// Title: Swissish_PlacementDensity.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 6\nvar aspect_min = 1\nvar aspect_max = 7\nvar aspect = $feature.ASPECT\n\n// Hachure Rendering Parameters\n// Dictate the min and max width of the hachure banding (pts)\nvar dense_min = 3\nvar dense_max = 5\nvar dense_range = dense_max - dense_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure rendering density\nvar hachure_density = (((aspect - aspect_min) * dense_range) / aspect_max) + dense_min\n\n// Invert Terrain Aware Value and Return\n// Invert the density value obtained so it logically scales with the shading behaviour we'd expect\nreturn IIf($feature.SLOPE > slope_min, Text((Round(Abs(hachure_density - dense_max) + dense_min, 2))), Text(0))",
+                "title" : "Swissish_PlacementDensity",
+                "expression" : "// Title: Swissish_PlacementDensity.lxp\n// Location: Copy/Paste this arcade expression in the X of the symbology panel.\n\n// Terrain Constraints\n// These constraints control the allowable attribute range a contour line must\n// possess in order to be rendered. A good default is min: 1 and max: 7.\n// Note: Only features that have a Slope/Aspect greater than the defined minimums\n//       will be rendered.\nvar slope_min = 6\nvar aspect_min = 1\nvar aspect_max = 7\nvar aspect = $feature.ASPECT\n\n// Hachure Rendering Parameters\n// Dictate the min and max width of the hachure banding (pts)\nvar dense_min = 3\nvar dense_max = 4\nvar dense_range = dense_max - dense_min\n\n// Terrain Encoding\n// Map the terrain values to a hachure rendering density\nvar hachure_density = (((aspect - aspect_min) * dense_range) / aspect_max) + dense_min\n\n// Invert Terrain Aware Value and Return\n// Invert the density value obtained so it logically scales with the shading behaviour we'd expect\nreturn IIf($feature.SLOPE > slope_min, Text((Round(Abs(hachure_density - dense_max) + dense_min, 2))), Text(0))",
                 "returnType" : "Default"
               }
             }
@@ -490,10 +493,6 @@
                 "effects" : [
                   {
                     "type" : "CIMGeometricEffectDashes",
-                    "dashTemplate" : [
-                      5,
-                      3
-                    ],
                     "lineDashEnding" : "NoConstraint",
                     "controlPointEnding" : "NoConstraint"
                   },
