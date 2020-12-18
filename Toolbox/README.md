@@ -34,10 +34,11 @@ All of the styles included with this toolbox rely on [Attribute-driven Symbology
 ###### Notes
 
 # Development Goals
-- CIM Access
-  - Map scale to render scale ratio?
-- Broken contours (low slope areas)
-- Manual override of minimum area
-- Update all expressions to ensure they default to `Text(0)`
-- Rename `render_min` and `render_max`?
-- Elevation subset modifier
+- [x] Correct the `slope_min` criteria of the Swiss-ish layer file to fix the "broken contours" in low slope areas.
+- [ ] Author a `elevation_subset` modifier expression that can be applied to various expressions that allows the user to apply a 'defintion query` and only render specific contour intervals of the _'terrain-aware'_ contours.
+- [ ] Review the `updateParameters` method of the `CreateTerrainAwareLayers` tool. Prevent the tool overriding a user supplied `minimum_polygon_area` input with the default value.
+- [ ] Review all arcade expressions and ensure the default value is supplied as `Text(0)`. This will resolve odd cases when the symbol panel expects the parameter as text vs integer.
+- [ ] Review all arcade expressions and convert any instances of technique parameters ex. `hachure_min` to a more consistent `render_min`. This will allow for consistent code if Cartography Information Model (CIM) is achieved.
+- [ ] Determine if `arcpy.ApplySymbologyFromLayer_management(in_layer=in_layer, in_symbology_layer=stylePath)` is achievable from python within the `StyleTerrainAwareLayers` tool (appears to be a bug as per BUG-000106281, BUG-000108497).
+  - [ ] If we can apply symbology from python, determine if there is a loose `scaling_factor` or relationship between `map scale` and `render parameters`. If so, we can estimate the render settings based on the scale provided by the user as an input to the tool.
+  - [ ] With a calculated `scaling_factor` we could access the arcade expressions within the layer file and update the `render parameters` prior to applying the layer file to a layer in the map (this is primarily applicable when the user does not set a `reference scale` and intends to author the map at a scale other than `1:24,000`).
