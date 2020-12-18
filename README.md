@@ -32,7 +32,7 @@ The toolbox is authored as a [Python Toolbox](https://pro.arcgis.com/en/pro-app/
 
 Further detail describing how these tools function is provided in the associated [readme](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#terrain-aware-toolbox).
 
-_*The core geoprocessing tool is functional although some areas of improvement exist. For a breakdown of current issues, limitations, and next steps check out the Toolbox readme and the [development goals section](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#development-goals).
+_*The core geoprocessing tool is functional although some areas of improvement exist. For a breakdown of current issues, limitations, and next steps check out the Toolbox readme and the [development goals section](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#development-goals)._
 
 ## Styles
 This [folder and its sub-directories](https://github.com/WarrenDz/terrain-aware/tree/main/Styles#styles) are organized by general technique, containing all of the layer files `.lyrx`, arcade expressions `.lxp`, and the style file `.stylx` required to start rendering your _'terrain aware'_ layers. Each technique will have an additional readme detailing how to edit the arcade expressions.
