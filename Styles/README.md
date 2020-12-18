@@ -1,17 +1,17 @@
 # Styles
 Buckle up! The following section breaks down each of the styles and how the Arcade Expressions are used to render the symbology. The structure of all the Arcade Expressions is fairly similar with some common variables that control the symbology. Here's a quick walkthrough of the general structure before we dig into how these expressions are applied within each style.
 
+## Style
+The `.stylx` file is the ArcGIS Pro style that contains the raw symbology elements used within each of the layer files. These symbols **do not** contain arcade expressions in their symbol rendering logic.
+
+This style catalog serves as a useful as a jumping off point to experiment and modify the various symbol elements. Want to create your own version of hachures or halftone dots? Start with the existing symbols and construct and/or deconstruct (as per the culinary trend) to suit your needs.
+
 ## Layer Files
 Layer files are all named based on the technique they are designed to render. These layer files `.lyrx` already have the arcade expressions baked into their symbology and are the quickest way to getting started. They reveal where the expressions have been applied within the symbology pane of ArcGIS Pro and how they effect how the style is rendered.
 
 These layer files are provided as a general template and a starting point to fine tune and configure the variables that control the rendering of the layer, further configuration and experimentation are encouraged! The Header of each unique readme file indicates the geometry that the layer file is used to style ex. 'Watercolour **(Polygon)**'.
 
 _*Note: For consistency all of the layer files have been configured to display best at `24,000`. Depending on your needs you can either set a reference scale on your map to match `24,000` or adjust the parameters of the expressions to suit your needs. There are plans for a [future improvement](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#development-goals) to assist with this configuration._
-
-## Style
-The `.stylx` file is the ArcGIS Pro style that contains the raw symbology elements used within each of the layer files. These symbols **do not** contain arcade expressions in their symbol rendering logic.
-
-This style catalog serves as a useful as a jumping off point to experiment and modify the various symbol elements. Want to create your own version of hachures or halftone dots? Start with the existing symbols and construct and/or deconstruct (as per the culinary trend) to suit your needs.
 
 ## Arcade Expressions
 The arcade expressions are the magic sauce. These expressions consume attributes values assigned to the features within the _'terrain aware'_ layers and modify the symbology variables that control how features are drawn.
