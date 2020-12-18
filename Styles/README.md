@@ -4,9 +4,9 @@ Buckle up! The following section breaks down each of the styles and how the Arca
 ## Layer Files
 Layer files are all named based on the technique they are designed to render. These layer files `.lyrx` already have the arcade expressions baked into their symbology and are the quickest way to getting started. They reveal where the expressions have been applied within the symbology pane of ArcGIS Pro and how they effect how the style is rendered.
 
-These layer files are provided as a general template and a starting point to fine tune and configure the variables that control the rendering of the layer, further configuration and experimentation are encouraged!
+These layer files are provided as a general template and a starting point to fine tune and configure the variables that control the rendering of the layer, further configuration and experimentation are encouraged! The Header of each unique readme file indicates the geometry that the layer file is used to style ex. 'Watercolour **(Polygon)**'.
 
-_*Note: For consistency all of the layer files have been configured to display best at `24,000`. Depending on your needs you can either set a reference scale on your map to match `24,000` or adjust the parameters of the expressions to suit your needs. There are plans for a [future improvement]() to assist with this configuration._
+_*Note: For consistency all of the layer files have been configured to display best at `24,000`. Depending on your needs you can either set a reference scale on your map to match `24,000` or adjust the parameters of the expressions to suit your needs. There are plans for a [future improvement](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#development-goals) to assist with this configuration._
 
 ## Style
 The `.stylx` file is the ArcGIS Pro style that contains the raw symbology elements used within each of the layer files. These symbols **do not** contain arcade expressions in their symbol rendering logic.
@@ -61,7 +61,7 @@ In hindsight, I should have named these consitently as `render` throughout the e
 
 # FAQ
 **A symbol element is drawing when it shouldn't.**
-check these `min/max` settings for the symbol properties that have been configured. Chances are something isn't constrained the way you intended.
+- Check these `min/max` settings for the symbol properties that have been configured. Chances are something isn't constrained the way you intended.
 
 **I've configured a symbol to appear but it's not showing up.**
-Keep in mind if the properties you're configuring are all applied to the same symbol element the most restrictive `min/max` constraints will determine whether the feature appears. Give them all a once over and double-check they're set consistently.
+- Keep in mind if the properties you're configuring are all applied to the same symbol element the most restrictive `min/max` constraints will determine whether the feature appears. Give them all a once over and double-check they're set consistently.

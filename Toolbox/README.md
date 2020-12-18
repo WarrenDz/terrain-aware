@@ -35,6 +35,9 @@ All of the styles included with this toolbox rely on [Attribute-driven Symbology
 
 # Development Goals
 - CIM Access
+  - Map scale to render scale ratio?
 - Broken contours (low slope areas)
-- Overwrite of minimum area
-- 
+- Manual override of minimum area
+- Update all expressions to ensure they default to `Text(0)`
+- Rename `render_min` and `render_max`?
+- Elevation subset modifier
