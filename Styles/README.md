@@ -1,7 +1,7 @@
 # Styles
 Buckle up! The following section breaks down each of the styles and how the Arcade Expressions are used to render the symbology. The structure of all the Arcade Expressions is fairly similar with some common variables that control the symbology. Here's a quick walkthrough of the general structure before we dig into how these expressions are applied within each style.
 
-## Style
+## Style File
 The `.stylx` file is the ArcGIS Pro style that contains the raw symbology elements used within each of the layer files. These symbols **do not** contain arcade expressions in their symbol rendering logic.
 
 This style catalog serves as a useful as a jumping off point to experiment and modify the various symbol elements. Want to create your own version of hachures or halftone dots? Start with the existing symbols and construct and/or deconstruct (as per the culinary trend) to suit your needs.
