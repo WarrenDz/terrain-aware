@@ -34,3 +34,7 @@ All of the styles included with this toolbox rely on [Attribute-driven Symbology
 ###### Notes
 
 # Development Goals
+- CIM Access
+- Broken contours (low slope areas)
+- Overwrite of minimum area
+- 

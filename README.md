@@ -37,6 +37,8 @@ _*The core geoprocessing tool is functional although some areas of improvement e
 ## Styles
 This [folder and its sub-directories](https://github.com/WarrenDz/terrain-aware/tree/main/Styles#styles) are organized by general technique, containing all of the layer files `.lyrx`, arcade expressions `.lxp`, and the style file `.stylx` required to start rendering your _'terrain aware'_ layers. Each technique will have an additional readme detailing how to edit the arcade expressions.
 
+The [readme](https://github.com/WarrenDz/terrain-aware/tree/main/Styles#faq) in this folder is also a good place to start in the event symbol drawing goes sideways!
+
 ## Samples
 This `Samples` folder contains all the gratuitous screenshots of the tool outputs in all their rendered glory. Feast your eyes on these [symbology snacks](https://github.com/WarrenDz/terrain-aware/tree/main/Samples), get inspired, and go make your own!
 
