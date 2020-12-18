@@ -16,6 +16,6 @@
 // Define elevation variable
 var elev = $feature.ELEVATION
 // if ends in '00' we'll increase the width otherwise use default of 0.25. Everything else will be a hidden contour and will only have hachures.
-var width = When(Right(elev,2) == '00', 0.5, Right(elev,2) == '25', 0.25, Right(elev,2) == '50', 0.25, Right(elev,2) == '75', 0.25, 0)
+var width = When(Right(elev,2) == '00', 0.5, Right(elev,2) == '25', 0.25, Right(elev,2) == '50', 0.25, Right(elev,2) == '75', 0.25, Text(0))
 
 return width
