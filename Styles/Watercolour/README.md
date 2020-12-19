@@ -1,7 +1,7 @@
 # Watercolour Style (Polygon)
 The watercolour style makes use of a modified polygon fill from John Nelson’s [watercolour style](https://arcg.is/0meKiK) to render the terrain polygons with a painterly effect. Don’t forget to use a paper fill beneath for good measure and slap a blend mode on for bonus points.
 
-`sample image`
+![Watercolour Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_Watercolour2_wd.png)
 
 ## Parameters
 param1:

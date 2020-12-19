@@ -1,8 +1,8 @@
 # Terrain Aware Toolbox
-This toolbox does a bunch of neat stuff with terrain data and then some equally absurd stuff with arcade expressions. Intrigured? Keep reading!
+This toolbox does a bunch of neat stuff with terrain data and then some equally absurd stuff with arcade expressions. Intrigued? Keep reading!
 
 ## Create Terrain Aware Layers
-This tool is the core of the toolbox. It’s the heavy lifter and creates all of the terrain aware data framework that is needed to render the cartographic outputs. The steps involved largely follow those outlined in [this walkthrough](https://warrenrdavison.wixsite.com/maps/post/revisiting-hachure-lines-dynamic-hachure-contours-in-arcgis-pro) with the exception of a few enhancements that were implemented in the process of scripting the python tool.
+This tool is the core of the toolbox. It’s the heavy lifter and creates all of the terrain aware data framework that is needed to render the cartographic outputs. The steps involved largely follow those outlined in [this walkthrough](https://warrenrdavison.wixsite.com/maps/post/revisiting-hachure-lines-dynamic-hachure-contours-in-arcgis-pro) with the exception of a few enhancements that were implemented in the process of scripting the python tool ([below](https://github.com/WarrenDz/terrain-aware/tree/main/Toolbox#processing-steps)).
 
 ### Parameters
 This tool requires the following inputs in order to generate a contour output and a polygon dataset with _'terrain aware'_ attributes.
