@@ -1,5 +1,5 @@
 # Styles
-Buckle up! The following section breaks down each of the styles and how the Arcade Expressions are used to render the symbology. The structure of all the Arcade Expressions is fairly similar with some common variables that control the symbology. Here's a quick walkthrough of the general structure before we dig into how these expressions are applied within each style.
+Buckle up! The following readme provides an overview the style file, the layer files, and some of the features of the Arcade Expressions used to render the symbology.
 
 ## Style File
 The `.stylx` file is the ArcGIS Pro style that contains the raw symbology elements used within each of the layer files. These symbols **do not** contain arcade expressions in their symbol rendering logic.

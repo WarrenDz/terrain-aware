@@ -4,7 +4,7 @@ This python toolbox has been designed to generate and style _'terrain aware'_ fe
 Many of the cartographic techniques rendered by this tool are best discussed and described in additional detail in the collection of [Terrain Tools](arcg.is/1GvWPr) created by Kenneth Field and Linda Beale. Those Terrain Tools were a both source of inspiration and constant reference while creating this toolbox.
 
 ## Backstory
-The methods behind this madness were inspired by the terrain shading prowess of John Nelson and his adventures in creating a reproduction of [Chevalier’s hachure shading](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/chevalier-shade/) and [Erwin Raisz landscape maps](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/landscape-map-in-the-spirit-of-erwin-raisz/). Entranced and inspired I tried it out myself, and you should too!
+The methods behind this madness were inspired by the terrain shading methods, he'd call them 'hacks', of John Nelson and his adventures in creating a reproduction of [Chevalier’s hachure shading](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/chevalier-shade/) and [Erwin Raisz landscape maps](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/landscape-map-in-the-spirit-of-erwin-raisz/). Entranced and inspired I tried it out myself, and you should too!
 
 The beauty of sharing is that it often inspires others to re-use, adapt, and modify it for their own maps or better yet, fuel even more creativity. In this case, I was hooked, and it led me down a rabbit hole. I dove headlong into how I might further iterate and refine upon the concept.
 
