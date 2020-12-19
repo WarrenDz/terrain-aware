@@ -23,6 +23,8 @@ Depending on the complexity of the technique, some layer files may have several 
 ### Expression Parameters
 The structure and application of arcade expressions throughout the various styles does vary but there are a few parameters that are used generally through the expressions and worth providing some additional descriptions.
 
+![Expression Diagram](https://github.com/WarrenDz/terrain-aware/blob/main/Images/Expression_Diagram.png)
+
 #### aspect & slope min/max
 These input parameters inform the slope contraints of the symbol rendering. Think of these constraints like `definition queries` where features that satisfy the criteria will appear in the map and those that don't will be omitted. The difference with these constraints is that features satisfying these constraints will be drawn and those that don't will not, however the geometry of undrawn features still persist within the map and can be used for labelling if needed.
 
