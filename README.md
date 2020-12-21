@@ -2,7 +2,7 @@
 ![](https://github.com/WarrenDz/terrain-aware/blob/main/Images/BannerAd_White_Small.png)
 This python toolbox has been designed to generate and style _'terrain aware'_ features classes based on an input Digital Elevation Model (DEM). The output polyline and polygon feature classes can be styled through the use of [Arcade Expressions](https://developers.arcgis.com/arcade/) in the ArcGIS Pro symbology panel to showcase a collection of artistic methods for rendering 3-dimensional terrain on a 2-dimensional map.
 
-Many of the cartographic techniques rendered by this tool are best discussed and described in additional detail in the collection of [Terrain Tools](arcg.is/1GvWPr) created by Kenneth Field and Linda Beale. Those Terrain Tools were a both source of inspiration and constant reference while creating this toolbox.
+Many of the cartographic techniques rendered by this tool are best discussed and described in additional detail in the collection of [Terrain Tools](arcg.is/1GvWPr) by Kenneth Field. Those Terrain Tools were a both source of inspiration and constant reference while creating this toolbox.
 
 ## Backstory
 The methods behind this madness were inspired by the terrain shading methods, he'd call them 'hacks', of John Nelson and his adventures in creating a reproduction of [Chevalier’s hachure shading](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/chevalier-shade/) and [Erwin Raisz landscape maps](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/landscape-map-in-the-spirit-of-erwin-raisz/). Entranced and inspired I tried it out myself, and you should too!
