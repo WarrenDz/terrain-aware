@@ -7,7 +7,7 @@ This style uses a layer of dots for each colour of cyan, magenta, yellow, and bl
 [CMYK Screen Angles - Wikipedia](https://en.wikipedia.org/wiki/Screen_angle)
 The dots vary in size based on terrain to produce a coloured gradient. Feel free to experiment and change the colour ratios or remove a layer of dots for a different effect.
 
-![CYMK Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_CMYK_wd.png)
+![CYMK Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_CMYK_wd.png)
 
 ### Parameters
 #### Dot Size
@@ -19,7 +19,7 @@ The `Halftone_DotSize.lxp` arcade expression has been applied to the `Size` para
 
 
 ## Halftone (Polygon)
-![Halftone Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_Halftone_wd.png)
+![Halftone Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Halftone_wd.png)
 This style uses a single layer of dots as a marker fill within in a polygon to simulate a single colour halftone print.
 
 ### Parameters
