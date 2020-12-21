@@ -34,7 +34,7 @@ Constraining the `aspect_min=4` will produce hachures only on shaded slopes simi
 ## Swiss-ish (Contours)
 An interpretation of Swiss Topo hachures.
 
-!['Swiss-ish Hachures'](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Hachure_Swissish_wd.png)
+!['Swiss-ish Hachures'](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_HachureSwissish_wd.png)
 
 ### Parameters
 The symbol parameters for this style are nearly identical to the standard Hachure style. The exception is that the slope settings have been confirgured so that the hachures are only drawn in the steepest sloped portions of the terrain `slope_min = 6`. Where the terrain is less than this value, the symbology will render as contour lines.
