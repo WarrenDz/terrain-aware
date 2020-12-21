@@ -50,7 +50,10 @@ As with the hillshade tool, the azimuth sets the direction of the light source. 
 
 
 ## Style Terrain Aware Layers (*requires workaround)
-Once the terrain aware layers have been generated, you can use this tool to apply one of the [predefined styles](https://github.com/WarrenDz/terrain-aware/tree/main/Styles). The tool updates the styling of the tool with one of the available styles, based on the geometry of the terrain aware layer, and attempts to adjust the rendering settings to adjust for the intended map scale.
+*I haven't been able to workaround a python bug at the moment so in order to apply the symbology of the various techniques, you'll need to* `Import symbology...` manually for the time being.
+![Import symbology...](https://github.com/WarrenDz/terrain-aware/blob/main/Images/ImportSymbology.png)
+
+Once the bug is resolved or a workaround found, you can use this tool to apply one of the [predefined styles](https://github.com/WarrenDz/terrain-aware/tree/main/Styles). The tool updates the styling of the tool with one of the available styles, based on the geometry of the terrain aware layer, and attempts to adjust the rendering settings to adjust for the intended map scale.
 
 The styles I've included are just samples that I've dreamt up while experimenting, but they showcase some of the possibilities and are useful examples of how the effects can be configured. Try them out, break open the expressions and see how they impact the rendering, and try to tweak them for your own use!
 
