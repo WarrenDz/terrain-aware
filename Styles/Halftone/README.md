@@ -20,6 +20,7 @@ The `Halftone_DotSize.lxp` arcade expression has been applied to the `Size` para
 
 ## Halftone (Polygon)
 ![Halftone Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Halftone_wd.png)
+
 This style uses a single layer of dots as a marker fill within in a polygon to simulate a single colour halftone print.
 
 ### Parameters
