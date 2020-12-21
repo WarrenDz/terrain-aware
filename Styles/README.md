@@ -67,3 +67,26 @@ In hindsight, I should have named these consitently as `render` throughout the e
 
 **I've configured a symbol to appear but it's not showing up.**
 - Keep in mind if the properties you're configuring are all applied to the same symbol element the most restrictive `min/max` constraints will determine whether the feature appears. Give them all a once over and double-check they're set consistently.
+
+**At 1:24,000 symbology looks good, but at any other scale the effect breaks down and looks jumbled or sparse.**
+- The layer files and their baked in expressions have been configured at a scale of `1:24,000`. This is where the effect will look the best by default. You can tweak the `render min/max` values to suit your desired map scale or set a reference scale.
+
+**The contours are jumbling up my map, How do I omit some contour intervals for clarity?**
+- To omit some contour intervals from the map, you can likely apply a definition query to the layer. This will remove features from the map. When using a definition query be sure that none of the other symbol elements of the style (ex. hachures marks) will be impacted by removing that interval. In the case of the **Swiss-ish** style, it may be required that hachures are drawn on **every interval** and contours are drawn on **every other**. To faciliate this you can apply an 'elevation filter' expression to just a single symbol element.
+
+For instance, here's an example of a 'elevation filter' I've applied to contour lines so that intervals are only drawn if they are a multiple of `25`.
+
+    // Terrain Constraints
+    var slope_limit = 7
+    var slope = $feature.SLOPE
+
+    // Symbol Encoding
+    var stroke_weight = 0.5
+
+    // If the elevation value ends in '00, 25, 50, 75' we'll set the width. Otherwise, it will be a hidden contour.
+    var elev = Text($feature.Contour)
+    var width = When(Right(elev,2) == '00', Text(stroke_weight), Right(elev,2) == '50', Text(stroke_weight),Right(elev,2) == '25', Text(stroke_weight), Right(elev,2) == '75', Text(stroke_weight),Text(0))
+
+    // Return Terrain Aware Value where criteria is met
+    return IIf($feature.SLOPE < slope_limit, Text(width), Text(0))
+

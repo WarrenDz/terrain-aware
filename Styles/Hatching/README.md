@@ -1,7 +1,7 @@
 # Hatching Style (Polygon)
 This style uses a hatching fill with varying stroke wweights to depict the terrain.
 
-![Hatched Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_HatchLines_wd.png)
+![Hatched Terrain Polygons](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_HatchLines_wd.png)
 
 ### Parameters
 #### Stroke Weight
