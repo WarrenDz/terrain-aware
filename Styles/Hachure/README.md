@@ -3,7 +3,7 @@ These styles utilize [hachure strokes](https://en.wikipedia.org/wiki/Hachure_map
 
 ## Hachure (Contours)
 Your steadfast classic hachures.
-![Hachures](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_Hachure_Chevalier_wd.png)
+![Hachures](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Hachure_Chevalier_wd.png)
 
 ### Parameters
 ![Symbol variable inputs](https://github.com/WarrenDz/terrain-aware/blob/main/Images/Hachure_SymbolPanel.png)
@@ -25,11 +25,11 @@ The density of the hachure strokes is modified by the `Hachure_PlacementDensity.
 ### Hachure Usage Notes
 Modifying the `aspect_min` variable within each of the arcade expressions of this style can be used to constrain how far hachures wrap around the slopes. Setting an `aspect_min=0` will result in full blown 'fuzzy caterpillar' hachures.
 
-!['Fuzzy Caterpillars'](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_Hachure_FuzzyCaterpillar_wd.png)
+!['Fuzzy Caterpillars'](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Hachure_FuzzyCaterpillar_wd.png)
 
 Constraining the `aspect_min=4` will produce hachures only on shaded slopes similar to the [Chevalier hachures](https://www.davidrumsey.com/luna/servlet/s/5u3c4q).
 
-!['Chevalier Hachures'](https://github.com/WarrenDz/terrain-aware/blob/main/Samples/SanFran_Hachure_Chevalier_wd.png)
+!['Chevalier Hachures'](https://github.com/WarrenDz/terrain-aware/blob/main/Images/SanFran_Hachure_Chevalier_wd.png)
 
 ## Swiss-ish (Contours)
 An interpretation of Swiss Topo hachures.
