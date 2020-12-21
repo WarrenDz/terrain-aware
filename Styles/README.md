@@ -39,7 +39,7 @@ The constraining effect of these parameters is evaluated in the **last expressio
 
 Using the combination of `slope` and `aspect` constraints, we can control which features recieve specific symbol treatment and how it is drawn without duplicating the layer in the `table of contents` of our map (and applying the associated definition queries there).
 
-Leveraging this control, we can control which slopes (flat/steep) and aspects (sunlit/shaded) recieve our symbol treatment. For instance, to achieve a similar hachure shading as **Augustine Chevalier** in [this map](https://www.davidrumsey.com/luna/servlet/s/5u3c4q) we can increase our aspect constraint ex. `var aspect_min = 3` of the `Hachure.lyrx` style. This would restrict the rendering of the  hachure strokes to only those slopes where the aspect was **greater than or equal to 3**.
+Leveraging this control, we can control which slopes (flat/steep) and aspects (sunlit/shaded) recieve our symbol treatment. For instance, to achieve a similar hachure shading as **August Chevalier** in [this map](https://www.davidrumsey.com/luna/servlet/s/5u3c4q) we can increase our aspect constraint ex. `var aspect_min = 3` of the `Hachure.lyrx` style. This would restrict the rendering of the  hachure strokes to only those slopes where the aspect was **greater than or equal to 3**.
 
 The opposite of the **Chevalier hachure shading** would be the full-blown 'fuzzy caterpillar' hachures wrapping around all slopes of the terrain regardless of aspect. In this case, leave the default of `var slope_min = 1`.
 
