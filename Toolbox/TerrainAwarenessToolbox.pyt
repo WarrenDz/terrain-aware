@@ -73,18 +73,30 @@ class CreateTerrainAwareLayers(object):
 
         # Fourth parameter
         param3 = arcpy.Parameter(
+            displayName="Terrain Fidelity",
+            name="terrain_fidelity",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+
+        # Restrict the inputs to one of these options
+        param3.filter.list = ["LO_FI", "MID_FI", "HI_FI"]
+        param3.value = "LO_FI"
+
+        # Fifth parameter
+        param4 = arcpy.Parameter(
             displayName="Processing Extent",
             name="map_extent",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        # Restrict the inputs to one of two options
-        param3.filter.list = ["DEM_EXTENT", "LAYER_EXTENT", "DISPLAY_EXTENT"]
-        param3.value = "DEM_EXTENT"
+        # Restrict the inputs to one of these options
+        param4.filter.list = ["DEM_EXTENT", "LAYER_EXTENT", "DISPLAY_EXTENT"]
+        param4.value = "DEM_EXTENT"
 
-        # Fifth parameter
-        param4 = arcpy.Parameter(
+        # Sixth parameter
+        param5 = arcpy.Parameter(
             displayName="Extent Layer",
             name="extent_layer",
             datatype="GPFeatureLayer",
@@ -92,18 +104,18 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Restrict the Cartographic extent input to a polygon feature layer
-        param4.filter.list = ["Polygon"]
+        param5.filter.list = ["Polygon"]
 
-        # Sixth parameter
-        param5 = arcpy.Parameter(
+        # Seventh parameter
+        param6 = arcpy.Parameter(
             displayName="Minimum Terrain Polygon Area",
             name="min_poly_area",
             datatype="GPDouble",
             parameterType="Required",
             direction="Input")
 
-        # Seventh parameter
-        param6 = arcpy.Parameter(
+        # Eight parameter
+        param7 = arcpy.Parameter(
             displayName="Smoothing Neighbourhood",
             name="focal_nbhd",
             datatype="GPLong",
@@ -111,10 +123,10 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default value to a cell neighbourhood of 10
-        param6.value = "10"
+        param7.value = "10"
 
-        # Eighth parameter
-        param7 = arcpy.Parameter(
+        # Ninth parameter
+        param8 = arcpy.Parameter(
             displayName="Azimuth Angle",
             name="azimuth",
             datatype="GPLong",
@@ -122,12 +134,20 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default azimuth angle (light source) to 315-upper left
-        param7.value = "315"
+        param8.value = "315"
         # Filter the allowable values for the azimuth to 0 - 360 degrees
-        param7.filter.type = "Range"
-        param7.filter.list = [0, 360]
+        param8.filter.type = "Range"
+        param8.filter.list = [0, 360]
 
-        parameters = [param0, param1, param2, param3, param4, param5, param6, param7]
+        # Tenth parameter
+        param9 = arcpy.Parameter(
+            displayName="Skip Contours",
+            name="skip_contours",
+            datatype="GPBoolean",
+            parameterType="Optional",
+            direction="Input")
+
+        parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9]
 
         return parameters
 
@@ -147,6 +167,17 @@ class CreateTerrainAwareLayers(object):
         validation is performed.  This method is called whenever a parameter
         has been changed."""
 
+        # Clarify parameters here for easier mods
+        dem = parameters[0]
+        contours = parameters[1]
+        polygons = parameters[2]
+        fidelity = parameters[3]
+        extent = parameters[4]
+        extent_lyr = parameters[5]
+        min_setting = parameters[6]
+        smoothing = parameters[7]
+        azimuth = parameters[8]
+
         # Define a variable to keep the scaling consistent
         # this value dictates the percent of total area (DEM extent) that will be used to default the min_polygon_size
         pct_area = 0.0000075
@@ -156,40 +187,39 @@ class CreateTerrainAwareLayers(object):
         # Do not set if there is no input feature yet, or if there is a custom area specified (Altered is true)."""
 
         # Control vis of layer input
-        if parameters[3].valueAsText == "LAYER_EXTENT":
-            parameters[4].enabled = True
+        if extent.valueAsText == "LAYER_EXTENT":
+            extent_lyr.enabled = True
         else:
-            parameters[4].enabled = False
+            extent_lyr.enabled = False
 
         # Hmmmmmm...
         """Stumped here on a method to update the min_area when the parameters are changed but not when a user overwrites it..."""
         # Calculate minimum area based on DEM extent
-        if parameters[3].valueAsText == "DEM_EXTENT" and parameters[0].altered and not parameters[0].valueAsText == "":
-            desc = arcpy.Describe(parameters[0].valueAsText)
+        if extent.valueAsText == "DEM_EXTENT" and dem.altered and not dem.valueAsText == "":
+            desc = arcpy.Describe(dem.valueAsText)
             min_area = round(((desc.extent.XMax - desc.extent.XMin) * (desc.extent.YMax - desc.extent.YMin)) * pct_area,
                              0)
             # Set the default minimum area
-            parameters[5].value = min_area
+            min_setting.value = min_area
         else:
             pass
 
         # Calculate minimum area based on layer extent
-        if parameters[3].valueAsText == "LAYER_EXTENT" and parameters[4].altered and not parameters[
-                                                                                             4].valueAsText == "":
-            fc = parameters[4].valueAsText
+        if extent.valueAsText == "LAYER_EXTENT" and extent_lyr.altered and not extent_lyr.valueAsText == "":
+            fc = extent_lyr.valueAsText
             area = [row[0] for row in arcpy.da.SearchCursor(fc,['SHAPE@AREA'])]
             min_area = round(area[0] * pct_area, 0)
-            parameters[5].value = min_area
+            min_setting.value = min_area
         else:
             pass
 
-        if parameters[3].valueAsText == "DISPLAY_EXTENT":
+        if extent.valueAsText == "DISPLAY_EXTENT":
             aprx = arcpy.mp.ArcGISProject("CURRENT")
             mv = aprx.activeView
             ext = mv.camera.getExtent()
             min_area = round(((ext.XMax - ext.XMin) * (ext.YMax - ext.YMin)) * pct_area,
                              0)
-            parameters[5].value = min_area
+            min_setting.value = min_area
         else:
             pass
 
@@ -199,28 +229,39 @@ class CreateTerrainAwareLayers(object):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
 
+        # Clarify parameters here for easier mods
+        dem = parameters[0]
+        contours = parameters[1]
+        polygons = parameters[2]
+        fidelity = parameters[3]
+        extent = parameters[4]
+        extent_lyr = parameters[5]
+        min_setting = parameters[6]
+        smoothing = parameters[7]
+        azimuth = parameters[8]
+
         # Clear messages
 
         # Provide an info warning if DEM is selected that it needs to align to area of interest
-        if parameters[3].valueAsText == "DEM_EXTENT":
-            parameters[3].setWarningMessage(
+        if extent.valueAsText == "DEM_EXTENT":
+            extent.setWarningMessage(
                 "Ensure that the input DEM aligns with the intended area of interest. Using a DEM that greatly exceeds the area of interest may include terrain features that could skew the Slope/Aspect values assigned in the contours")
         else:
             pass
 
         # Ensure that the minimum_polygon_area is greater than 0
-        if parameters[5].altered:
-            if int(parameters[5].value) < 0:
-                parameters[5].setErrorMessage("A positive area value is required. Please specify an area measure.")
+        if min_setting.altered:
+            if int(min_setting.value) < 0:
+                min_setting.setErrorMessage("A positive area value is required. Please specify an area measure.")
             else:
                 pass
         else:
             pass
 
         # Ensure that the focal neighbourhood is greater than 0
-        if parameters[6].altered:
-            if int(parameters[6].value) < 1:
-                parameters[6].setErrorMessage(
+        if smoothing.altered:
+            if int(smoothing.value) < 1:
+                smoothing.setErrorMessage(
                     "A positive neighbourhood value is required. Please specify an cell neighbourhood measure.")
             else:
                 pass
@@ -228,8 +269,8 @@ class CreateTerrainAwareLayers(object):
             pass
 
         # Ensure that the cartographic extent layer has a value
-        if parameters[2].valueAsText == "LAYER_EXTENT" and not parameters[4].altered or parameters[4].valueAsText == "":
-            parameters[4].setErrorMessage(
+        if extent.valueAsText == "LAYER_EXTENT" and not extent_lyr.altered or extent_lyr.valueAsText == "":
+            extent_lyr.setErrorMessage(
                 "A layer is required when the Processing Extent has been set to LAYER_EXTENT. Please select a layer from the dropdown to restrict the output processing results.")
         else:
             pass
@@ -243,11 +284,26 @@ class CreateTerrainAwareLayers(object):
         in_dem = parameters[0].valueAsText
         out_contours = parameters[1].valueAsText
         out_polygons = parameters[2].valueAsText
-        map_extent = parameters[3].valueAsText
-        extent_layer = parameters[4].valueAsText
-        min_poly_area = parameters[5].value
-        nbhd = parameters[6].value
-        azimuth_angle = parameters[7].value
+        fidelity = parameters[3].valueAsText
+        map_extent = parameters[4].valueAsText
+        extent_layer = parameters[5].valueAsText
+        min_poly_area = parameters[6].value
+        nbhd = parameters[7].value
+        azimuth_angle = parameters[8].value
+        skip_contours = parameters[9]
+
+        # fidelity configuration
+        fidelity_config = {
+            "LO_FI": {"aspect_bins": 6,
+                      "aspect_increment": 60,
+                      "slope_bins": 3},
+            "MID_FI": {"aspect_bins": 8,
+                      "aspect_increment": 45,
+                      "slope_bins": 5},
+            "HI_FI": {"aspect_bins": 12,
+                      "aspect_increment": 30,
+                      "slope_bins": 7}
+        }
 
         # Assign the default workspace based on contour output location
         out_dir = os.path.dirname(out_contours)
@@ -304,80 +360,82 @@ class CreateTerrainAwareLayers(object):
             # Omit areas of low slope
             extract_slope = arcpy.sa.ExtractByAttributes(in_raster=slope_raster, where_clause="Value > 5")
             del slope_raster
-            reclass_slope = arcpy.sa.Slice(in_raster=extract_slope, number_zones=7, slice_type="NATURAL_BREAKS")
+            # Slicing slope based on zones defined by fidelity configuration
+            reclass_slope = arcpy.sa.Slice(in_raster=extract_slope, number_zones=fidelity_config[fidelity]["slope_bins"], slice_type="NATURAL_BREAKS")
             del extract_slope
 
             # Reclassify aspect raster
             """Processing the aspect is slightly more complex. Since the tool allows for the user to define the
             azimuth we need to be able to reclass based on an initial reference point (the selected azimuth).
-            Adjacent 30 degree increment zones will then be assigned a progressively greater value
+            Adjacent zones will then be assigned a progressively greater value
             (both clockwise and counter-clockwise)."""
 
-            # shade_list contains the values we'd like to eventually assign to our 30 degree zones.
-            shade_list = [1, 2, 3, 4, 5, 6, 7]
-
-            # aspect_dict contains a initial index of azimuth ranges that will form the upper/lower values of our reclassification table
-            aspect_dict = {0: [0, 30], 1: [31, 60], 2: [61, 90], 3: [91, 120], 4: [121, 150], 5: [151, 180],
-                           6: [181, 210], 7: [211, 240], 8: [241, 270], 9: [271, 300], 10: [301, 330], 11: [331, 360]}
-
-            arcpy.AddMessage("...Mapping aspect values based on reference azimuth...")
-            # This loop determine which key, value pair best represents the azimuth selected by the user.
-            # The aspect_index value assigned as a reference point for determining the remapping of adjacent azimuth zones
-            for a in aspect_dict:
-                if aspect_dict[a][0] < azimuth_angle < aspect_dict[a][1]:
-                    aspect_index = a
+            # Aspect bin dictionary constructor
+            def calc_azimuth_bin(azimuth, increment, iteration, bins):
+                half_increment = increment / 2
+                # Determine centre of zone
+                centre = azimuth + (increment * iteration)
+                # Calculate lower bin value
+                bin_low = centre - half_increment
+                # Validity check to ensure it doesn't exceed < 0 or > 360
+                if bin_low < 0:
+                    bin_low += 360
+                elif bin_low > 360:
+                    bin_low = bin_low - 360
                 else:
                     pass
 
-            # Now loop the aspect list using our reference index to create our ranges for remapping
-            aspect_loop = 0
-            # aspect_remap is an empty container that will be populated with our remapping values using the for loop below.
-            aspect_remap = []
-
-            # This loop iterates through the potential 'shadiness' assignments and gathers the appropriate azimuth 'bookends' to add to the remapping table.
-            for s in shade_list:
-                # First loop
-                if aspect_loop == 0:
-                    aspect_remap.append(
-                        ["{0}, {1}, {2}".format(aspect_dict[aspect_index][0], aspect_dict[aspect_index][1], s)])
-
-                # Last loop
-                elif aspect_loop == 6:
-                    if aspect_index + aspect_loop > 11:
-                        aspect_remap.append(["{0}, {1}, {2}".format(
-                            aspect_dict[abs((aspect_index + aspect_loop) - 12)][0],
-                            aspect_dict[abs((aspect_index + aspect_loop) - 12)][1], s)])
-                    else:
-                        aspect_remap.append(["{0}, {1}, {2}".format(aspect_dict[aspect_index + 7][0],
-                                                                    aspect_dict[aspect_index + 7][1], s)])
-
-                # Any other loop
+                # Going to maintain that the lower range of the bin will be adjusted to ensure no overlap
+                if iteration == 0:
+                    pass
                 else:
-                    # Assign with this logic if the index would become a negative number by subtracting our loop increment
-                    if aspect_index - aspect_loop < 0:
-                        aspect_remap.append(["{0}, {1}, {2}".format(
-                            aspect_dict[abs(12 - (aspect_index + aspect_loop))][0],
-                            aspect_dict[abs(12 - (aspect_index + aspect_loop))][1], s)])
-                        aspect_remap.append(["{0}, {1}, {2}".format(aspect_dict[aspect_index + aspect_loop][0],
-                                                                    aspect_dict[aspect_index + aspect_loop][1], s)])
+                    bin_low += 1
 
-                    # Assign with this logic if the index would exceed our dictionary items by adding our loop increment
-                    elif aspect_index + aspect_loop > 11:
-                        aspect_remap.append(["{0}, {1}, {2}".format(
-                            aspect_dict[abs((aspect_index + aspect_loop) - 12)][0],
-                            aspect_dict[abs((aspect_index + aspect_loop) - 12)][1], s)])
-                        aspect_remap.append(["{0}, {1}, {2}".format(aspect_dict[aspect_index - aspect_loop][0],
-                                                                    aspect_dict[aspect_index - aspect_loop][1], s)])
+                # Calculate upper bin value
+                bin_high = centre + half_increment
+                if bin_high < 0:
+                    bin_high += 360
+                elif bin_high > 360:
+                    bin_high = bin_high - 360
+                else:
+                    pass
 
-                    # Assign with this logic if our index and increment end up within the bounds of our dictionary items
+                # Going to maintain that the upper range of the last bin will be adjusted to ensure no overlap
+                if iteration == bins:
+                    bin_high = bin_high -1
+                else:
+                    pass
+
+                return bin_low, bin_high
+            
+            arcpy.AddMessage("...Calculating aspect breaks and re-mapping values...")    
+            # Create azimuth bin dictionary
+            i = 0  # Loop counter
+            v = 0  # re-mapping aspect value
+            aspect_remap = []  # list to contain re-mapped values formatted for table
+
+            while i <= fidelity_config[fidelity]["aspect_bins"] -1:
+                # Calculate bin partitions
+                bin_low, bin_high = calc_azimuth_bin(azimuth_angle, fidelity_config[fidelity]["aspect_increment"], i, fidelity_config[fidelity]["aspect_bins"] - 1)
+                # Determine aspect re-mapping value
+                # On the first loop we simply assign a value of 1
+                if i == 0:
+                    v = i + 1
+                # on future iterations we check to see if the number of iterations has looped half our bins
+                else:
+                    if i <= fidelity_config[fidelity]["aspect_bins"] / 2:
+                        # If we're less than halfway or at halfway, continue to increment the aspect assignments
+                        v = i + 1
                     else:
-                        aspect_remap.append(["{0}, {1}, {2}".format(aspect_dict[aspect_index - aspect_loop][0],
-                                                                    aspect_dict[aspect_index - aspect_loop][1], s)])
-                        aspect_remap.append(["{0}, {1}, {2}".format(aspect_dict[aspect_index + aspect_loop][0],
-                                                                    aspect_dict[aspect_index + aspect_loop][1], s)])
-
-                # Increment the loop counter for the next run
-                aspect_loop += 1
+                        # Otherwise we'll begin to decrease the aspect assignments since we've passed 180 of the provided azimuth
+                        v -= 1
+                # This statement processes bins that cross the 360/0 line and split them to logical partitions
+                if bin_low > bin_high:
+                    aspect_remap.append(["{0}, {1}, {2}".format(str(bin_low)[:-2], 360, v)])
+                    aspect_remap.append(["{0}, {1}, {2}".format(str(0), str(bin_high)[:-2], v)])
+                else:
+                    aspect_remap.append(["{0}, {1}, {2}".format(str(bin_low)[:-2], str(bin_high)[:-2], v)])
+                i += 1
 
             # Aspect remapping range table
             arcpy.AddMessage("...Aspect ranges remapped: {0}".format(aspect_remap))
@@ -479,22 +537,27 @@ class CreateTerrainAwareLayers(object):
             arcpy.Union_analysis(in_features=["Slope_Polygons", "Aspect_Polygons"],
                                  out_feature_class=out_polygons, join_attributes="AlL")
 
-            # Create Contours
-            arcpy.AddMessage("Creating countours...")
-            arcpy.sa.Contour(in_raster=smooth_dem, out_polyline_features="contours", contour_interval=5, base_contour=0,
-                             contour_type="CONTOUR")
+            # Option to skip contour creation
+            if skip_contours == False:
+                # Create Contours
+                arcpy.AddMessage("Creating countours...")
+                arcpy.sa.Contour(in_raster=smooth_dem, out_polyline_features="contours", contour_interval=5, base_contour=0,
+                                contour_type="CONTOUR")
 
-            # Intersect contours with terrain polygons
-            arcpy.AddMessage("...Intersecting contours with terrain raster...")
-            # Create TERRAIN AWARENESS!!!
-            arcpy.Intersect_analysis(in_features=["contours", out_polygons], out_feature_class=out_contours,
-                                     join_attributes="NO_FID", output_type="LINE")
-            arcpy.AddMessage("...dropping some extra fields...")
-            """Need to delete the extra fields associated with the polygons here too..."""
-            arcpy.DeleteField_management(in_table=out_polygons,
+                # Intersect contours with terrain polygons
+                arcpy.AddMessage("...Intersecting contours with terrain raster...")
+                # Create TERRAIN AWARENESS!!!
+                arcpy.Intersect_analysis(in_features=["contours", out_polygons], out_feature_class=out_contours,
+                                        join_attributes="NO_FID", output_type="LINE")
+                arcpy.AddMessage("...dropping some extra fields...")
+                """Need to delete the extra fields associated with the polygons here too..."""
+                arcpy.DeleteField_management(in_table=out_polygons,
+                                            drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
+                arcpy.DeleteField_management(in_table=out_contours,
+                                            drop_field=["FID_Slope_Polygons", "Id_1", "FID_Aspect_Polygons", "Id_12"])
+            else:
+                            arcpy.DeleteField_management(in_table=out_polygons,
                                          drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
-            arcpy.DeleteField_management(in_table=out_contours,
-                                         drop_field=["FID_Slope_Polygons", "Id_1", "FID_Aspect_Polygons", "Id_12"])
 
             # Success message
             arcpy.AddMessage("BUCKLE UP - You just create some terrain aware contour lines! Go style them yourself or"
