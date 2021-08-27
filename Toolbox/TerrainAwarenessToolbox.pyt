@@ -508,7 +508,7 @@ class CreateTerrainAwareLayers(object):
             # Create TERRAIN AWARENESS!!!
             arcpy.Intersect_analysis(in_features=["contours", out_polygons], out_feature_class=out_contours,
                                     join_attributes="NO_FID", output_type="LINE")
-            arcpy.AddMessage("...dropping some extra fields...")
+            arcpy.AddMessage("...Dropping some extra fields...")
             arcpy.DeleteField_management(in_table=out_polygons,
                                         drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
             arcpy.DeleteField_management(in_table=out_contours,
@@ -517,16 +517,16 @@ class CreateTerrainAwareLayers(object):
             # Add attribute indices
             """In and attempt to improve the drawing performance we'll add atribute indices here..."""
             arcpy.AddMessage("Performing some optimization on terrain aware polygons...")
-            arcpy.AddMessage("...adding attribute index to slope of polygons...")
-            arcpy.management.AddIndex(in_table=out_polygons, fields=["SLOPE"], index_name="slope_index", ascending="ASCENDING")
-            arcpy.AddMessage("...adding attribute index to aspect of polygons...")
-            arcpy.management.AddIndex(in_table=out_polygons, fields=["ASPECT"], index_name="aspect_index", ascending="ASCENDING")
+            arcpy.AddMessage("...Adding attribute index to slope of polygons...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["SLOPE"], index_name="slope", ascending="ASCENDING")
+            arcpy.AddMessage("...Adding attribute index to aspect of polygons...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["ASPECT"], index_name="aspect", ascending="ASCENDING")
 
             arcpy.AddMessage("Performing some optimization on terrain aware contours...")
-            arcpy.AddMessage("...adding attribute index to slope of contours...")
-            arcpy.management.AddIndex(in_table=out_polygons, fields=["SLOPE"], index_name="slope_index", ascending="ASCENDING")
-            arcpy.AddMessage("...adding attribute index to aspect of contours...")
-            arcpy.management.AddIndex(in_table=out_polygons, fields=["ASPECT"], index_name="aspect_index", ascending="ASCENDING")
+            arcpy.AddMessage("...Adding attribute index to slope of contours...")
+            arcpy.management.AddIndex(in_table=out_contours, fields=["SLOPE"], index_name="slope", ascending="ASCENDING")
+            arcpy.AddMessage("...Adding attribute index to aspect of contours...")
+            arcpy.management.AddIndex(in_table=out_contours, fields=["ASPECT"], index_name="aspect", ascending="ASCENDING")
 
 
             # Success message
