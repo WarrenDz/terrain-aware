@@ -3,7 +3,7 @@
 # version 1.0 - 2020/12/03
 #
 # This toolbox was inspired by the Terrain Tools toolbox created by Kenneth Field and Linda Beale, Esri Inc.
-#  https://arcg.is/1L9jGO
+# https://arcg.is/1L9jGO
 #
 # This technique was built on the methods created by: John Nelson, Esri Inc.
 # https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/landscape-map-in-the-spirit-of-erwin-raisz/
@@ -108,14 +108,22 @@ class CreateTerrainAwareLayers(object):
 
         # Seventh parameter
         param6 = arcpy.Parameter(
-            displayName="Minimum Terrain Polygon Area",
+            displayName="Contour Interval",
+            name="contour_interval",
+            datatype="GPLong",
+            parameterType="Required",
+            direction="Input")
+
+        # Eighth parameter
+        param7 = arcpy.Parameter(
+            displayName="Minimum Polygon Area",
             name="min_poly_area",
             datatype="GPDouble",
             parameterType="Required",
             direction="Input")
 
-        # Eight parameter
-        param7 = arcpy.Parameter(
+        # Ninth parameter
+        param8 = arcpy.Parameter(
             displayName="Smoothing Neighbourhood",
             name="focal_nbhd",
             datatype="GPLong",
@@ -123,10 +131,10 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default value to a cell neighbourhood of 10
-        param7.value = "10"
+        param8.value = "10"
 
-        # Ninth parameter
-        param8 = arcpy.Parameter(
+        # Tenth parameter
+        param9 = arcpy.Parameter(
             displayName="Azimuth Angle",
             name="azimuth",
             datatype="GPLong",
@@ -134,18 +142,10 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default azimuth angle (light source) to 315-upper left
-        param8.value = "315"
+        param9.value = "315"
         # Filter the allowable values for the azimuth to 0 - 360 degrees
-        param8.filter.type = "Range"
-        param8.filter.list = [0, 360]
-
-        # Tenth parameter
-        param9 = arcpy.Parameter(
-            displayName="Skip Contours",
-            name="skip_contours",
-            datatype="GPBoolean",
-            parameterType="Optional",
-            direction="Input")
+        param9.filter.type = "Range"
+        param9.filter.list = [0, 360]
 
         parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9]
 
@@ -168,61 +168,14 @@ class CreateTerrainAwareLayers(object):
         has been changed."""
 
         # Clarify parameters here for easier mods
-        dem = parameters[0]
-        contours = parameters[1]
-        polygons = parameters[2]
-        fidelity = parameters[3]
         extent = parameters[4]
         extent_lyr = parameters[5]
-        min_setting = parameters[6]
-        smoothing = parameters[7]
-        azimuth = parameters[8]
-
-        # Define a variable to keep the scaling consistent
-        # this value dictates the percent of total area (DEM extent) that will be used to default the min_polygon_size
-        pct_area = 0.0000075
-
-        # Set the default minimum area size to be some tiny percentage of the input feature.
-        """Using this method, it's possible to take a dynamic 'best guess' at the amount of generalization.
-        # Do not set if there is no input feature yet, or if there is a custom area specified (Altered is true)."""
 
         # Control vis of layer input
         if extent.valueAsText == "LAYER_EXTENT":
             extent_lyr.enabled = True
         else:
             extent_lyr.enabled = False
-
-        # Hmmmmmm...
-        """Stumped here on a method to update the min_area when the parameters are changed but not when a user overwrites it..."""
-        # Calculate minimum area based on DEM extent
-        if extent.valueAsText == "DEM_EXTENT" and dem.altered and not dem.valueAsText == "":
-            desc = arcpy.Describe(dem.valueAsText)
-            min_area = round(((desc.extent.XMax - desc.extent.XMin) * (desc.extent.YMax - desc.extent.YMin)) * pct_area,
-                             0)
-            # Set the default minimum area
-            min_setting.value = min_area
-        else:
-            pass
-
-        # Calculate minimum area based on layer extent
-        if extent.valueAsText == "LAYER_EXTENT" and extent_lyr.altered and not extent_lyr.valueAsText == "":
-            fc = extent_lyr.valueAsText
-            area = [row[0] for row in arcpy.da.SearchCursor(fc,['SHAPE@AREA'])]
-            min_area = round(area[0] * pct_area, 0)
-            min_setting.value = min_area
-        else:
-            pass
-
-        if extent.valueAsText == "DISPLAY_EXTENT":
-            aprx = arcpy.mp.ArcGISProject("CURRENT")
-            mv = aprx.activeView
-            ext = mv.camera.getExtent()
-            min_area = round(((ext.XMax - ext.XMin) * (ext.YMax - ext.YMin)) * pct_area,
-                             0)
-            min_setting.value = min_area
-        else:
-            pass
-
         return
 
     def updateMessages(self, parameters):
@@ -236,9 +189,10 @@ class CreateTerrainAwareLayers(object):
         fidelity = parameters[3]
         extent = parameters[4]
         extent_lyr = parameters[5]
-        min_setting = parameters[6]
-        smoothing = parameters[7]
-        azimuth = parameters[8]
+        contour_interval = parameters[6]
+        min_setting = parameters[7]
+        smoothing = parameters[8]
+        azimuth = parameters[9]
 
         # Clear messages
 
@@ -253,6 +207,15 @@ class CreateTerrainAwareLayers(object):
         if min_setting.altered:
             if int(min_setting.value) < 0:
                 min_setting.setErrorMessage("A positive area value is required. Please specify an area measure.")
+            else:
+                pass
+        else:
+            pass
+
+        # Ensure that the minimum_polygon_area is greater than 0
+        if contour_interval.altered:
+            if int(contour_interval.value) < 0:
+                contour_interval.setErrorMessage("A positive contour interval is required. Please specify a valid interval.")
             else:
                 pass
         else:
@@ -287,19 +250,19 @@ class CreateTerrainAwareLayers(object):
         fidelity = parameters[3].valueAsText
         map_extent = parameters[4].valueAsText
         extent_layer = parameters[5].valueAsText
-        min_poly_area = parameters[6].value
-        nbhd = parameters[7].value
-        azimuth_angle = parameters[8].value
-        skip_contours = parameters[9]
+        contour_interval = parameters[6].value
+        min_poly_area = parameters[7].value
+        nbhd = parameters[8].value
+        azimuth_angle = parameters[9].value
 
         # fidelity configuration
         fidelity_config = {
             "LO_FI": {"aspect_bins": 6,
                       "aspect_increment": 60,
-                      "slope_bins": 3},
+                      "slope_bins": 7},
             "MID_FI": {"aspect_bins": 8,
                       "aspect_increment": 45,
-                      "slope_bins": 5},
+                      "slope_bins": 7},
             "HI_FI": {"aspect_bins": 12,
                       "aspect_increment": 30,
                       "slope_bins": 7}
@@ -315,8 +278,6 @@ class CreateTerrainAwareLayers(object):
             desc = arcpy.Describe(in_dem)
             arcpy.env.extent = "{}, {}, {}, {}".format(desc.extent.XMin, desc.extent.YMin, desc.extent.XMax,
                                                        desc.extent.YMax)
-            print("{}, {}, {}, {}".format(desc.extent.XMin, desc.extent.YMin, desc.extent.XMax,
-                                                       desc.extent.YMax))
         elif map_extent == "EXTENT_LAYER":
             desc = arcpy.Describe(extent_layer)
             arcpy.env.extent = "{}, {}, {}, {}".format(desc.extent.XMin, desc.extent.YMin, desc.extent.XMax,
@@ -358,7 +319,7 @@ class CreateTerrainAwareLayers(object):
             able to segment the data in the raster using a classification scheme."""
             arcpy.AddMessage("...Slicing slope raster...")
             # Omit areas of low slope
-            extract_slope = arcpy.sa.ExtractByAttributes(in_raster=slope_raster, where_clause="Value > 5")
+            extract_slope = arcpy.sa.ExtractByAttributes(in_raster=slope_raster, where_clause="Value >= 3")
             del slope_raster
             # Slicing slope based on zones defined by fidelity configuration
             reclass_slope = arcpy.sa.Slice(in_raster=extract_slope, number_zones=fidelity_config[fidelity]["slope_bins"], slice_type="NATURAL_BREAKS")
@@ -407,12 +368,12 @@ class CreateTerrainAwareLayers(object):
                     pass
 
                 return bin_low, bin_high
-            
+
             arcpy.AddMessage("...Calculating aspect breaks and re-mapping values...")    
             # Create azimuth bin dictionary
             i = 0  # Loop counter
             v = 0  # re-mapping aspect value
-            aspect_remap = []  # list to contain re-mapped values formatted for table
+            aspect_remap = [["-1, 1, 0"]]  # list to contain re-mapped values formatted for table (contains default for flat)
 
             while i <= fidelity_config[fidelity]["aspect_bins"] -1:
                 # Calculate bin partitions
@@ -432,7 +393,7 @@ class CreateTerrainAwareLayers(object):
                 # This statement processes bins that cross the 360/0 line and split them to logical partitions
                 if bin_low > bin_high:
                     aspect_remap.append(["{0}, {1}, {2}".format(str(bin_low)[:-2], 360, v)])
-                    aspect_remap.append(["{0}, {1}, {2}".format(str(0), str(bin_high)[:-2], v)])
+                    aspect_remap.append(["{0}, {1}, {2}".format(str(1), str(bin_high)[:-2], v)])
                 else:
                     aspect_remap.append(["{0}, {1}, {2}".format(str(bin_low)[:-2], str(bin_high)[:-2], v)])
                 i += 1
@@ -497,7 +458,7 @@ class CreateTerrainAwareLayers(object):
             # Convert min_poly_area to a count of cells that represent that same area.
             min_cell_count = round((min_poly_area / cell_area), 0)
             arcpy.AddMessage(
-                "...Extracting regions with less than {} cells. This cell group was calculated using a cell size of {} x {} (area: {}) and minimum polygon area of: {}...".format(
+                "...Removing regions with less than {} cells. This cell group was calculated using a cell size of {} x {} (area: {}) and minimum polygon area of: {}...".format(
                     min_cell_count, round(cell_size_x, 2), round(cell_size_y, 2), round(cell_area, 2), min_poly_area))
 
             # Create selection expression
@@ -537,27 +498,36 @@ class CreateTerrainAwareLayers(object):
             arcpy.Union_analysis(in_features=["Slope_Polygons", "Aspect_Polygons"],
                                  out_feature_class=out_polygons, join_attributes="AlL")
 
-            # Option to skip contour creation
-            if skip_contours == False:
-                # Create Contours
-                arcpy.AddMessage("Creating countours...")
-                arcpy.sa.Contour(in_raster=smooth_dem, out_polyline_features="contours", contour_interval=5, base_contour=0,
-                                contour_type="CONTOUR")
+            # Create Contours
+            arcpy.AddMessage("Creating countours...")
+            arcpy.sa.Contour(in_raster=smooth_dem, out_polyline_features="contours", contour_interval=contour_interval, base_contour=0,
+                            contour_type="CONTOUR")
 
-                # Intersect contours with terrain polygons
-                arcpy.AddMessage("...Intersecting contours with terrain raster...")
-                # Create TERRAIN AWARENESS!!!
-                arcpy.Intersect_analysis(in_features=["contours", out_polygons], out_feature_class=out_contours,
-                                        join_attributes="NO_FID", output_type="LINE")
-                arcpy.AddMessage("...dropping some extra fields...")
-                """Need to delete the extra fields associated with the polygons here too..."""
-                arcpy.DeleteField_management(in_table=out_polygons,
-                                            drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
-                arcpy.DeleteField_management(in_table=out_contours,
-                                            drop_field=["FID_Slope_Polygons", "Id_1", "FID_Aspect_Polygons", "Id_12"])
-            else:
-                            arcpy.DeleteField_management(in_table=out_polygons,
-                                         drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
+            # Intersect contours with terrain polygons
+            arcpy.AddMessage("...Intersecting contours with terrain raster...")
+            # Create TERRAIN AWARENESS!!!
+            arcpy.Intersect_analysis(in_features=["contours", out_polygons], out_feature_class=out_contours,
+                                    join_attributes="NO_FID", output_type="LINE")
+            arcpy.AddMessage("...dropping some extra fields...")
+            arcpy.DeleteField_management(in_table=out_polygons,
+                                        drop_field=["FID_Slope_Polygons", "Id", "FID_Aspect_Polygons", "Id_1"])
+            arcpy.DeleteField_management(in_table=out_contours,
+                                        drop_field=["FID_Slope_Polygons", "Id_1", "FID_Aspect_Polygons", "Id_12"])
+
+            # Add attribute indices
+            """In and attempt to improve the drawing performance we'll add atribute indices here..."""
+            arcpy.AddMessage("Performing some optimization on terrain aware polygons...")
+            arcpy.AddMessage("...adding attribute index to slope of polygons...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["SLOPE"], index_name="slope_index", ascending="ASCENDING")
+            arcpy.AddMessage("...adding attribute index to aspect of polygons...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["ASPECT"], index_name="aspect_index", ascending="ASCENDING")
+
+            arcpy.AddMessage("Performing some optimization on terrain aware contours...")
+            arcpy.AddMessage("...adding attribute index to slope of contours...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["SLOPE"], index_name="slope_index", ascending="ASCENDING")
+            arcpy.AddMessage("...adding attribute index to aspect of contours...")
+            arcpy.management.AddIndex(in_table=out_polygons, fields=["ASPECT"], index_name="aspect_index", ascending="ASCENDING")
+
 
             # Success message
             arcpy.AddMessage("BUCKLE UP - You just create some terrain aware contour lines! Go style them yourself or"
