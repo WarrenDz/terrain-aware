@@ -116,14 +116,25 @@ class CreateTerrainAwareLayers(object):
 
         # Eighth parameter
         param7 = arcpy.Parameter(
+            displayName="Z Factor",
+            name="slope_z_factor",
+            datatype="GPLong",
+            parameterType="Required",
+            direction="Input")
+
+        # Set default Z Factor
+        param7.value = 1
+
+        # Ninth parameter
+        param8 = arcpy.Parameter(
             displayName="Minimum Polygon Area",
             name="min_poly_area",
             datatype="GPDouble",
             parameterType="Required",
             direction="Input")
 
-        # Ninth parameter
-        param8 = arcpy.Parameter(
+        # Tenth parameter
+        param9 = arcpy.Parameter(
             displayName="Smoothing Neighbourhood",
             name="focal_nbhd",
             datatype="GPLong",
@@ -131,10 +142,10 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default value to a cell neighbourhood of 10
-        param8.value = "10"
+        param9.value = "10"
 
-        # Tenth parameter
-        param9 = arcpy.Parameter(
+        # Eleventh parameter
+        param10 = arcpy.Parameter(
             displayName="Azimuth Angle",
             name="azimuth",
             datatype="GPLong",
@@ -142,12 +153,12 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default azimuth angle (light source) to 315-upper left
-        param9.value = "315"
+        param10.value = "315"
         # Filter the allowable values for the azimuth to 0 - 360 degrees
-        param9.filter.type = "Range"
-        param9.filter.list = [0, 360]
+        param10.filter.type = "Range"
+        param10.filter.list = [0, 360]
 
-        parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9]
+        parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10]
 
         return parameters
 
@@ -190,9 +201,10 @@ class CreateTerrainAwareLayers(object):
         extent = parameters[4]
         extent_lyr = parameters[5]
         contour_interval = parameters[6]
-        min_setting = parameters[7]
-        smoothing = parameters[8]
-        azimuth = parameters[9]
+        slope_z_factor = parameters[7]
+        min_setting = parameters[8]
+        smoothing = parameters[9]
+        azimuth = parameters[10]
 
         # Clear messages
 
@@ -251,9 +263,10 @@ class CreateTerrainAwareLayers(object):
         map_extent = parameters[4].valueAsText
         extent_layer = parameters[5].valueAsText
         contour_interval = parameters[6].value
-        min_poly_area = parameters[7].value
-        nbhd = parameters[8].value
-        azimuth_angle = parameters[9].value
+        slope_z_factor = parameters[7].value
+        min_poly_area = parameters[8].value
+        nbhd = parameters[9].value
+        azimuth_angle = parameters[10].value
 
         # fidelity configuration
         fidelity_config = {
@@ -305,7 +318,7 @@ class CreateTerrainAwareLayers(object):
             """Generating a slope and aspect raster based on smoothed DEM."""
             arcpy.AddMessage("Generating terrain rasters...")
             arcpy.AddMessage("...Creating slope raster...")
-            slope_raster = arcpy.sa.Slope(in_raster=smooth_dem, output_measurement="DEGREE")
+            slope_raster = arcpy.sa.Slope(in_raster=smooth_dem, output_measurement="DEGREE", z_factor=slope_z_factor)
             arcpy.AddMessage("...Creating aspect raster...")
             aspect_raster = arcpy.sa.Aspect(in_raster=smooth_dem)
 
