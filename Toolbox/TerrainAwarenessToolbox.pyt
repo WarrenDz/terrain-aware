@@ -584,16 +584,24 @@ class StyleTerrainAwareLayer(object):
             datatype="GPFeatureLayer",
             parameterType="Required",
             direction="Input")
-
+        
         # Third Parameter
         param2 = arcpy.Parameter(
-            displayName="Map Scale",
-            name="map_scale",
-            datatype="GPLong",
-            parameterType="Required",
-            direction="Input")
+            displayName="Output Layer",
+            name="out_layer",
+            datatype="GPFeatureLayer",
+            parameterType="Derived",
+            direction="Output")
 
-        param2.value = 24000
+        # # Third Parameter
+        # param2 = arcpy.Parameter(
+        #     displayName="Map Scale",
+        #     name="map_scale",
+        #     datatype="GPLong",
+        #     parameterType="Required",
+        #     direction="Input")
+
+        # param2.value = 24000
 
         parameters = [param0, param1, param2]
 
@@ -640,14 +648,14 @@ class StyleTerrainAwareLayer(object):
                 parameters[1].setErrorMessage("The input layer does not have the required SLOPE and ASPECT fields.")
 
         # Ensure that the map scale is greater than 0
-        if parameters[2].altered:
-            if int(parameters[2].value) < 1:
-                parameters[2].setErrorMessage(
-                    "A positive map scale value is required.")
-            else:
-                pass
-        else:
-            pass
+        # if parameters[2].altered:
+        #     if int(parameters[2].value) < 1:
+        #         parameters[2].setErrorMessage(
+        #             "A positive map scale value is required.")
+        #     else:
+        #         pass
+        # else:
+        #     pass
 
         return
 
@@ -657,7 +665,8 @@ class StyleTerrainAwareLayer(object):
         # Gather parameters
         in_style = parameters[0].valueAsText
         in_layer = parameters[1].valueAsText
-        in_scale = parameters[2].value
+        out_layer = parameters[2].valueAsText
+        # in_scale = parameters[2].value
 
         arcpy.AddMessage(in_style)
         arcpy.AddMessage(in_layer)
@@ -683,20 +692,10 @@ class StyleTerrainAwareLayer(object):
             arcpy.AddMessage("Attempting to gather style file for {}...".format(in_style))
             arcpy.AddMessage("...Style file found in directory: {}...".format(stylePath))
 
-            arcpy.AddWarning("Sorry, the ability to Apply Symbology From Layer is currently impacted by a bug (BUG-000106281, BUG-000108497) and does not function from Python a tool. Apply the styles manually for now.")
+            # Update symbology of layer
+            arcpy.SetParameter(2,arcpy.ApplySymbologyFromLayer_management(in_layer=in_layer, in_symbology_layer=stylePath))
 
-            # At the moment, the ability to apply symbology from a layer is impacted by BUG-#
-            # arcpy.ApplySymbologyFromLayer_management(in_layer=in_layer, in_symbology_layer=stylePath)
-
-            # aprx = arcpy.mp.ArcGISProject("CURRENT")
-            # map = aprx.listMaps()[0]
-            # layers = map.listLayers()
-            #
-            # for layer in layers:
-            #     if layer.name == in_layer:
-            #         arcpy.AddMessage(str(layer.name))
-            #         layer.updateConnectionProperties(in_layer, in_layer)
-
+            ## TO-DO: find a way to modify the CIM of the layer file and adjust the arcade expressions based on the scale of the map and the desired scale set by user.
 
         except:
             arcpy.AddError("Uh oh something went sideways when trying to find the style file, have they been moved?...")
