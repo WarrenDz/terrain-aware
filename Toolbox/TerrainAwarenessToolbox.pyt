@@ -125,8 +125,21 @@ class CreateTerrainAwareLayers(object):
         # Set default Z Factor
         param7.value = 1
 
-        # Ninth parameter
         param8 = arcpy.Parameter(
+            displayName="Minimum Slope (Percent)",
+            name="min_slope",
+            datatype="GPLong",
+            parameterType="Required",
+            direction="Input")
+        
+        # Set default minimum slope
+        param8.value = 1
+        # Filter the allowable values for the azimuth to 0 - 360 degrees
+        param8.filter.type = "Range"
+        param8.filter.list = [0, 100]
+
+        # Ninth parameter
+        param9 = arcpy.Parameter(
             displayName="Minimum Polygon Area",
             name="min_poly_area",
             datatype="GPDouble",
@@ -134,7 +147,7 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Tenth parameter
-        param9 = arcpy.Parameter(
+        param10 = arcpy.Parameter(
             displayName="Smoothing Neighbourhood",
             name="focal_nbhd",
             datatype="GPLong",
@@ -142,10 +155,10 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default value to a cell neighbourhood of 10
-        param9.value = "10"
+        param10.value = "10"
 
         # Eleventh parameter
-        param10 = arcpy.Parameter(
+        param11 = arcpy.Parameter(
             displayName="Azimuth Angle",
             name="azimuth",
             datatype="GPLong",
@@ -153,12 +166,12 @@ class CreateTerrainAwareLayers(object):
             direction="Input")
 
         # Set the default azimuth angle (light source) to 315-upper left
-        param10.value = "315"
+        param11.value = "315"
         # Filter the allowable values for the azimuth to 0 - 360 degrees
-        param10.filter.type = "Range"
-        param10.filter.list = [0, 360]
+        param11.filter.type = "Range"
+        param11.filter.list = [0, 360]
 
-        parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10]
+        parameters = [param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11]
 
         return parameters
 
@@ -202,9 +215,10 @@ class CreateTerrainAwareLayers(object):
         extent_lyr = parameters[5]
         contour_interval = parameters[6]
         slope_z_factor = parameters[7]
-        min_setting = parameters[8]
-        smoothing = parameters[9]
-        azimuth = parameters[10]
+        minimum_slope = parameters[8]
+        min_setting = parameters[9]
+        smoothing = parameters[10]
+        azimuth = parameters[11]
 
         # Clear messages
 
@@ -264,9 +278,10 @@ class CreateTerrainAwareLayers(object):
         extent_layer = parameters[5].valueAsText
         contour_interval = parameters[6].value
         slope_z_factor = parameters[7].value
-        min_poly_area = parameters[8].value
-        nbhd = parameters[9].value
-        azimuth_angle = parameters[10].value
+        minimum_slope = parameters[8].value
+        min_poly_area = parameters[9].value
+        nbhd = parameters[10].value
+        azimuth_angle = parameters[11].value
 
         # fidelity configuration
         fidelity_config = {
@@ -332,7 +347,8 @@ class CreateTerrainAwareLayers(object):
             able to segment the data in the raster using a classification scheme."""
             arcpy.AddMessage("...Slicing slope raster...")
             # Omit areas of low slope
-            extract_slope = arcpy.sa.ExtractByAttributes(in_raster=slope_raster, where_clause="Value >= 3")
+            min_slope_expr = "Value >= {}".format(minimum_slope)
+            extract_slope = arcpy.sa.ExtractByAttributes(in_raster=slope_raster, where_clause=min_slope_expr)
             del slope_raster
             # Slicing slope based on zones defined by fidelity configuration
             reclass_slope = arcpy.sa.Slice(in_raster=extract_slope, number_zones=fidelity_config[fidelity]["slope_bins"], slice_type="NATURAL_BREAKS")
