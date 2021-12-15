@@ -131,10 +131,10 @@ class CreateTerrainAwareLayers(object):
             datatype="GPLong",
             parameterType="Required",
             direction="Input")
-        
+
         # Set default minimum slope
-        param8.value = 1
-        # Filter the allowable values for the azimuth to 0 - 360 degrees
+        param8.value = 10
+        # Filter the allowable values for the slope to 0 - 100 percent
         param8.filter.type = "Range"
         param8.filter.list = [0, 100]
 
@@ -398,7 +398,7 @@ class CreateTerrainAwareLayers(object):
 
                 return bin_low, bin_high
 
-            arcpy.AddMessage("...Calculating aspect breaks and re-mapping values...")    
+            arcpy.AddMessage("...Calculating aspect breaks and re-mapping values...")
             # Create azimuth bin dictionary
             i = 0  # Loop counter
             v = 0  # re-mapping aspect value
@@ -600,7 +600,7 @@ class StyleTerrainAwareLayer(object):
             datatype="GPFeatureLayer",
             parameterType="Required",
             direction="Input")
-        
+
         # Third Parameter
         param2 = arcpy.Parameter(
             displayName="Output Layer",
